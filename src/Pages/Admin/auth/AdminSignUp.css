@@ -1,0 +1,937 @@
+/* ============================================
+   ADMIN SIGN UP - Unique admin-signup- prefix
+   ============================================ */
+
+/* ============================================
+   SIGN UP CONTAINER - Center Only
+   ============================================ */
+.admin-signup-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+    padding: 24px;
+}
+
+/* ============================================
+   SIGN UP CARD - No Scrollbar
+   ============================================ */
+.admin-signup-card {
+    background: var(--color-text-white);
+    border-radius: 24px;
+    padding: 48px 44px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 
+        0 20px 60px rgba(37, 99, 235, 0.12),
+        0 8px 24px rgba(37, 99, 235, 0.06);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.06);
+}
+
+.admin-signup-card:hover {
+    box-shadow: 
+        0 24px 72px rgba(37, 99, 235, 0.16),
+        0 8px 28px rgba(37, 99, 235, 0.08);
+}
+
+/* ============================================
+   LOGO SECTION
+   ============================================ */
+.admin-signup-logo-container {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.admin-signup-logo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 12px 40px rgba(37, 99, 235, 0.35);
+    transition: all 0.3s ease;
+}
+
+.admin-signup-logo-icon:hover {
+    transform: scale(1.05) rotate(-4deg);
+}
+
+.admin-signup-company-name {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--color-text-black);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.admin-signup-company-tagline {
+    color: var(--color-text-gray);
+    font-size: 14px;
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+/* ============================================
+   ERROR & SUCCESS MESSAGES
+   ============================================ */
+.admin-signup-error-message {
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.admin-signup-error-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.admin-signup-success-message {
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+}
+
+.admin-signup-success-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   FORM
+   ============================================ */
+.admin-signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.admin-signup-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-signup-form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-black);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-signup-input-icon {
+    color: var(--color-text-gray);
+    font-size: 15px;
+}
+
+.admin-signup-form-group input {
+    padding: 13px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    outline: none;
+    background: #f9fafb;
+    color: var(--color-text-black);
+    width: 100%;
+    font-family: inherit;
+}
+
+.admin-signup-form-group input::placeholder {
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.admin-signup-form-group input:focus {
+    border-color: var(--color-primary);
+    background: var(--color-text-white);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.admin-signup-form-group input.error {
+    border-color: var(--color-error);
+    background: #fef2f2;
+}
+
+.admin-signup-form-group input.error:focus {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 4px rgba(252, 129, 129, 0.08);
+}
+
+.admin-signup-form-group input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #f3f4f6;
+}
+
+/* ============================================
+   PASSWORD INPUT
+   ============================================ */
+.admin-signup-password-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.admin-signup-password-input-wrapper input {
+    padding-right: 48px;
+}
+
+.admin-signup-password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.admin-signup-password-toggle:hover {
+    color: var(--color-primary);
+    background: #f3f4f6;
+}
+
+.admin-signup-password-toggle:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   ERROR & SUCCESS TEXT
+   ============================================ */
+.admin-signup-error-text {
+    font-size: 13px;
+    color: var(--color-error);
+    padding-left: 4px;
+}
+
+.admin-signup-success-text {
+    font-size: 13px;
+    color: var(--color-success);
+    padding-left: 4px;
+}
+
+/* ============================================
+   PASSWORD REQUIREMENTS
+   ============================================ */
+.admin-signup-password-requirements {
+    background: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.admin-signup-password-requirements p {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text-black);
+    margin: 0 0 6px 0;
+}
+
+.admin-signup-password-requirements ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+}
+
+.admin-signup-password-requirements li {
+    font-size: 12px;
+    color: #9ca3af;
+    padding: 2px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.admin-signup-password-requirements li::before {
+    content: '○';
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.admin-signup-password-requirements li.met {
+    color: var(--color-success);
+}
+
+.admin-signup-password-requirements li.met::before {
+    content: '✓';
+    color: var(--color-success);
+    font-weight: bold;
+}
+
+/* ============================================
+   TERMS & CONDITIONS
+   ============================================ */
+.admin-signup-terms-group {
+    margin-top: -4px;
+}
+
+.admin-signup-terms-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--color-text-gray);
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+.admin-signup-terms-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+    margin-top: 1px;
+    flex-shrink: 0;
+}
+
+.admin-signup-terms-checkbox a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.admin-signup-terms-checkbox a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+}
+
+.admin-signup-terms-group .admin-signup-error-text {
+    display: block;
+    margin-top: 4px;
+}
+
+/* ============================================
+   SIGN UP BUTTON
+   ============================================ */
+.admin-signup-button {
+    padding: 15px 24px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-text-white);
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 56px;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-signup-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.6s ease;
+}
+
+.admin-signup-button:hover:not(:disabled)::before {
+    left: 100%;
+}
+
+.admin-signup-button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(37, 99, 235, 0.4);
+}
+
+.admin-signup-button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+}
+
+.admin-signup-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.admin-signup-spinner {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--color-text-white);
+    animation: adminSignupSpin 0.8s linear infinite;
+}
+
+@keyframes adminSignupSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   SIGN IN LINK
+   ============================================ */
+.admin-signup-signin-link {
+    text-align: center;
+    font-size: 14px;
+    color: var(--color-text-gray);
+    margin-top: 20px;
+}
+
+.admin-signup-signin-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.admin-signup-signin-link a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+}
+
+/* ============================================
+   OTP SECTION STYLES
+   ============================================ */
+.admin-signup-otp-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.admin-signup-otp-header {
+    text-align: center;
+}
+
+.admin-signup-otp-icon {
+    font-size: 48px;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.admin-signup-otp-message {
+    font-size: 15px;
+    color: var(--color-text-gray);
+    margin: 0;
+}
+
+.admin-signup-otp-message strong {
+    color: var(--color-text-black);
+}
+
+/* OTP Inputs */
+.admin-signup-otp-inputs {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 8px 0;
+}
+
+.admin-signup-otp-digit {
+    width: 48px;
+    height: 56px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    background: #f9fafb;
+    color: var(--color-text-black);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.admin-signup-otp-digit:focus {
+    border-color: var(--color-primary);
+    background: var(--color-text-white);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    outline: none;
+}
+
+.admin-signup-otp-digit.error {
+    border-color: var(--color-error);
+    background: #fef2f2;
+}
+
+.admin-signup-otp-digit.error:focus {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 4px rgba(252, 129, 129, 0.08);
+}
+
+.admin-signup-otp-digit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.admin-signup-otp-digit::-webkit-inner-spin-button,
+.admin-signup-otp-digit::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.admin-signup-otp-error {
+    text-align: center;
+    display: block;
+}
+
+/* Timer */
+.admin-signup-otp-timer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: var(--color-text-gray);
+}
+
+.admin-signup-timer-icon {
+    color: var(--color-warning);
+}
+
+.admin-signup-timer-label {
+    font-size: 14px;
+}
+
+/* Resend Button */
+.admin-signup-resend-btn {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.admin-signup-resend-btn:hover:not(:disabled) {
+    background: #f1f5f9;
+    text-decoration: underline;
+}
+
+.admin-signup-resend-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* OTP Actions */
+.admin-signup-otp-actions {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.admin-signup-back-btn {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    background: var(--color-text-white);
+    color: var(--color-text-black);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.admin-signup-back-btn:hover:not(:disabled) {
+    border-color: var(--color-text-gray);
+    background: #f8fafc;
+}
+
+.admin-signup-back-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.admin-signup-verify-btn {
+    flex: 2;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-text-white);
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: inherit;
+}
+
+.admin-signup-verify-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+}
+
+.admin-signup-verify-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+    .admin-signup-container {
+        padding: 16px;
+    }
+
+    .admin-signup-card {
+        padding: 32px 24px;
+        border-radius: 20px;
+    }
+
+    .admin-signup-logo-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+    }
+
+    .admin-signup-logo-icon svg {
+        font-size: 28px;
+    }
+
+    .admin-signup-company-name {
+        font-size: 22px;
+    }
+
+    .admin-signup-company-tagline {
+        font-size: 13px;
+    }
+
+    .admin-signup-form-group input {
+        padding: 11px 14px;
+        font-size: 14px;
+    }
+
+    .admin-signup-form-group label {
+        font-size: 13px;
+    }
+
+    .admin-signup-button {
+        font-size: 14px;
+        min-height: 50px;
+        padding: 12px 16px;
+    }
+
+    .admin-signup-signin-link {
+        font-size: 13px;
+    }
+
+    .admin-signup-password-requirements ul {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-signup-terms-checkbox {
+        font-size: 12px;
+    }
+
+    .admin-signup-otp-inputs {
+        gap: 8px;
+    }
+
+    .admin-signup-otp-digit {
+        width: 40px;
+        height: 48px;
+        font-size: 20px;
+    }
+
+    .admin-signup-otp-actions {
+        flex-direction: column;
+    }
+
+    .admin-signup-verify-btn, .admin-signup-back-btn {
+        padding: 14px 16px;
+    }
+}
+
+@media (max-width: 360px) {
+    .admin-signup-card {
+        padding: 24px 16px;
+        border-radius: 16px;
+    }
+
+    .admin-signup-company-name {
+        font-size: 20px;
+    }
+
+    .admin-signup-logo-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .admin-signup-logo-icon svg {
+        font-size: 24px;
+    }
+
+    .admin-signup-button {
+        font-size: 13px;
+        min-height: 46px;
+    }
+
+    .admin-signup-otp-inputs {
+        gap: 6px;
+    }
+
+    .admin-signup-otp-digit {
+        width: 34px;
+        height: 42px;
+        font-size: 18px;
+    }
+}
+
+/* ============================================
+   TOUCH DEVICES
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+    .admin-signup-button {
+        min-height: 56px;
+    }
+
+    .admin-signup-password-toggle {
+        padding: 12px;
+    }
+
+    .admin-signup-form-group input {
+        font-size: 16px;
+    }
+
+    .admin-signup-terms-checkbox input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    .admin-signup-container {
+        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    }
+
+    .admin-signup-card {
+        background: #1e293b;
+        border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .admin-signup-company-name {
+        color: #f1f5f9;
+    }
+
+    .admin-signup-company-tagline {
+        color: #94a3b8;
+    }
+
+    .admin-signup-form-group label {
+        color: #e2e8f0;
+    }
+
+    .admin-signup-form-group input {
+        background: #0f172a;
+        border-color: #334155;
+        color: #f1f5f9;
+    }
+
+    .admin-signup-form-group input:focus {
+        background: #0f172a;
+        border-color: var(--color-primary);
+    }
+
+    .admin-signup-form-group input::placeholder {
+        color: #64748b;
+    }
+
+    .admin-signup-form-group input.error {
+        border-color: var(--color-error);
+        background: #0f172a;
+    }
+
+    .admin-signup-password-toggle {
+        color: #64748b;
+    }
+
+    .admin-signup-password-toggle:hover {
+        color: var(--color-primary);
+        background: #1e293b;
+    }
+
+    .admin-signup-signin-link {
+        color: #94a3b8;
+    }
+
+    .admin-signup-signin-link a {
+        color: #60a5fa;
+    }
+
+    .admin-signup-signin-link a:hover {
+        color: #93bbfc;
+    }
+
+    .admin-signup-error-message {
+        background: #1e293b;
+        color: #f87171;
+        border-color: #7f1d1d;
+    }
+
+    .admin-signup-success-message {
+        background: #1e293b;
+        color: #4ade80;
+        border-color: #166534;
+    }
+
+    .admin-signup-password-requirements {
+        background: #0f172a;
+        border-color: #334155;
+    }
+
+    .admin-signup-password-requirements p {
+        color: #e2e8f0;
+    }
+
+    .admin-signup-password-requirements li {
+        color: #64748b;
+    }
+
+    .admin-signup-password-requirements li.met {
+        color: #4ade80;
+    }
+
+    .admin-signup-terms-checkbox {
+        color: #94a3b8;
+    }
+
+    .admin-signup-terms-checkbox a {
+        color: #60a5fa;
+    }
+
+    .admin-signup-terms-checkbox a:hover {
+        color: #93bbfc;
+    }
+
+    .admin-signup-terms-checkbox input[type="checkbox"] {
+        accent-color: var(--color-primary);
+    }
+
+    .admin-signup-error-text {
+        color: #f87171;
+    }
+
+    .admin-signup-success-text {
+        color: #4ade80;
+    }
+
+    .admin-signup-otp-digit {
+        background: #0f172a;
+        border-color: #334155;
+        color: #f1f5f9;
+    }
+
+    .admin-signup-otp-digit:focus {
+        background: #0f172a;
+        border-color: var(--color-primary);
+    }
+
+    .admin-signup-otp-digit.error {
+        border-color: var(--color-error);
+        background: #0f172a;
+    }
+
+    .admin-signup-otp-message {
+        color: #94a3b8;
+    }
+
+    .admin-signup-otp-message strong {
+        color: #f1f5f9;
+    }
+
+    .admin-signup-back-btn {
+        border-color: #334155;
+        background: #1e293b;
+        color: #e2e8f0;
+    }
+
+    .admin-signup-back-btn:hover:not(:disabled) {
+        border-color: #475569;
+        background: #0f172a;
+    }
+
+    .admin-signup-resend-btn:hover:not(:disabled) {
+        background: #1e293b;
+    }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .admin-signup-card {
+        transition: none;
+    }
+
+    .admin-signup-logo-icon {
+        transition: none;
+    }
+
+    .admin-signup-button::before {
+        display: none;
+    }
+
+    .admin-signup-button {
+        transition: none;
+    }
+
+    .admin-signup-form-group input {
+        transition: none;
+    }
+
+    .admin-signup-password-toggle {
+        transition: none;
+    }
+}

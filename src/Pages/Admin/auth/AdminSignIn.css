@@ -1,0 +1,839 @@
+/* ============================================
+   ADMIN SIGN IN - Unique admin-signin- prefix
+   ============================================ */
+
+/* ============================================
+   SIGN IN CONTAINER
+   ============================================ */
+.admin-signin-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var( --bg-gradient);
+    padding: 24px;
+}
+
+/* ============================================
+   SIGN IN CARD
+   ============================================ */
+.admin-signin-card {
+    background: var(--color-text-white);
+    border-radius: 24px;
+    padding: 48px 44px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 
+        0 20px 60px rgba(37, 99, 235, 0.12),
+        0 8px 24px rgba(37, 99, 235, 0.06);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.06);
+}
+
+.admin-signin-card:hover {
+    box-shadow: 
+        0 24px 72px rgba(37, 99, 235, 0.16),
+        0 8px 28px rgba(37, 99, 235, 0.08);
+}
+
+/* ============================================
+   LOGO SECTION
+   ============================================ */
+.admin-signin-logo-container {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.admin-signin-logo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 12px 40px rgba(37, 99, 235, 0.35);
+    transition: all 0.3s ease;
+}
+
+.admin-signin-logo-icon:hover {
+    transform: scale(1.05) rotate(-4deg);
+}
+
+.admin-signin-company-name {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--color-text-black);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.admin-signin-company-tagline {
+    color: var(--color-text-gray);
+    font-size: 14px;
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+/* ============================================
+   ERROR & SUCCESS MESSAGES
+   ============================================ */
+.admin-signin-error-message {
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.admin-signin-error-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.admin-signin-success-message {
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+}
+
+.admin-signin-success-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   FORM
+   ============================================ */
+.admin-signin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-signin-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-signin-form-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-black);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-signin-input-icon {
+    color: var(--color-text-gray);
+    font-size: 15px;
+}
+
+.admin-signin-form-group input {
+    padding: 13px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    outline: none;
+    background: #f9fafb;
+    color: var(--color-text-black);
+    width: 100%;
+    font-family: inherit;
+}
+
+.admin-signin-form-group input::placeholder {
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.admin-signin-form-group input:focus {
+    border-color: var(--color-primary);
+    background: var(--color-text-white);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+}
+
+.admin-signin-form-group input.error {
+    border-color: var(--color-error);
+    background: #fef2f2;
+}
+
+.admin-signin-form-group input.error:focus {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 4px rgba(252, 129, 129, 0.08);
+}
+
+.admin-signin-form-group input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #f3f4f6;
+}
+
+/* ============================================
+   PASSWORD INPUT
+   ============================================ */
+.admin-signin-password-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.admin-signin-password-input-wrapper input {
+    padding-right: 48px;
+}
+
+.admin-signin-password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 8px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.admin-signin-password-toggle:hover {
+    color: var(--color-primary);
+    background: #f3f4f6;
+}
+
+.admin-signin-password-toggle:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   FORM OPTIONS
+   ============================================ */
+.admin-signin-form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -4px;
+}
+
+.admin-signin-remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--color-text-gray);
+    cursor: pointer;
+}
+
+.admin-signin-remember-me input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.admin-signin-forgot-link {
+    font-size: 14px;
+    color: var(--color-text-gray);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.admin-signin-forgot-link:hover {
+    color: var(--color-primary);
+}
+
+/* ============================================
+   ERROR TEXT
+   ============================================ */
+.admin-signin-error-text {
+    font-size: 13px;
+    color: var(--color-error);
+    padding-left: 4px;
+}
+
+/* ============================================
+   SIGN IN BUTTON
+   ============================================ */
+.admin-signin-button {
+    padding: 15px 24px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-text-white);
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 56px;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-signin-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.6s ease;
+}
+
+.admin-signin-button:hover:not(:disabled)::before {
+    left: 100%;
+}
+
+.admin-signin-button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(37, 99, 235, 0.4);
+}
+
+.admin-signin-button:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+}
+
+.admin-signin-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.admin-signin-spinner {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--color-text-white);
+    animation: adminSigninSpin 0.8s linear infinite;
+}
+
+@keyframes adminSigninSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   SIGN UP LINK
+   ============================================ */
+.admin-signin-signup-link {
+    text-align: center;
+    font-size: 14px;
+    color: var(--color-text-gray);
+    margin-top: 4px;
+}
+
+.admin-signin-signup-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.admin-signin-signup-link a:hover {
+    color: var(--color-primary-dark);
+    text-decoration: underline;
+}
+
+/* ============================================
+   OTP SECTION
+   ============================================ */
+.admin-signin-otp-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.admin-signin-otp-header {
+    text-align: center;
+}
+
+.admin-signin-otp-icon {
+    font-size: 48px;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.admin-signin-otp-message {
+    font-size: 15px;
+    color: var(--color-text-gray);
+    margin: 0;
+}
+
+.admin-signin-otp-message strong {
+    color: var(--color-text-black);
+}
+
+/* OTP Inputs */
+.admin-signin-otp-inputs {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin: 8px 0;
+}
+
+.admin-signin-otp-digit {
+    width: 48px;
+    height: 56px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    background: #f9fafb;
+    color: var(--color-text-black);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.admin-signin-otp-digit:focus {
+    border-color: var(--color-primary);
+    background: var(--color-text-white);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
+    outline: none;
+}
+
+.admin-signin-otp-digit.error {
+    border-color: var(--color-error);
+    background: #fef2f2;
+}
+
+.admin-signin-otp-digit.error:focus {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 4px rgba(252, 129, 129, 0.08);
+}
+
+.admin-signin-otp-digit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.admin-signin-otp-digit::-webkit-inner-spin-button,
+.admin-signin-otp-digit::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.admin-signin-otp-error {
+    text-align: center;
+    display: block;
+}
+
+/* Timer */
+.admin-signin-otp-timer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: var(--color-text-gray);
+}
+
+.admin-signin-timer-icon {
+    color: var(--color-warning);
+}
+
+.admin-signin-timer-label {
+    font-size: 14px;
+}
+
+/* Resend Button */
+.admin-signin-resend-btn {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.admin-signin-resend-btn:hover:not(:disabled) {
+    background: #f1f5f9;
+    text-decoration: underline;
+}
+
+.admin-signin-resend-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* OTP Actions */
+.admin-signin-otp-actions {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    margin-top: 4px;
+}
+
+.admin-signin-back-btn {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    background: var(--color-text-white);
+    color: var(--color-text-black);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.admin-signin-back-btn:hover:not(:disabled) {
+    border-color: var(--color-text-gray);
+    background: #f8fafc;
+}
+
+.admin-signin-back-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.admin-signin-verify-btn {
+    flex: 2;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-text-white);
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: inherit;
+}
+
+.admin-signin-verify-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+}
+
+.admin-signin-verify-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+    .admin-signin-container {
+        padding: 16px;
+    }
+
+    .admin-signin-card {
+        padding: 32px 24px;
+        border-radius: 20px;
+    }
+
+    .admin-signin-logo-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+    }
+
+    .admin-signin-logo-icon svg {
+        font-size: 28px;
+    }
+
+    .admin-signin-company-name {
+        font-size: 22px;
+    }
+
+    .admin-signin-company-tagline {
+        font-size: 13px;
+    }
+
+    .admin-signin-form-group input {
+        padding: 11px 14px;
+        font-size: 14px;
+    }
+
+    .admin-signin-form-group label {
+        font-size: 13px;
+    }
+
+    .admin-signin-button {
+        font-size: 14px;
+        min-height: 50px;
+        padding: 12px 16px;
+    }
+
+    .admin-signin-form-options {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .admin-signin-signup-link {
+        font-size: 13px;
+    }
+
+    .admin-signin-otp-inputs {
+        gap: 8px;
+    }
+
+    .admin-signin-otp-digit {
+        width: 40px;
+        height: 48px;
+        font-size: 20px;
+    }
+
+    .admin-signin-otp-actions {
+        flex-direction: column;
+    }
+
+    .admin-signin-verify-btn,
+    .admin-signin-back-btn {
+        padding: 14px 16px;
+    }
+}
+
+@media (max-width: 360px) {
+    .admin-signin-card {
+        padding: 24px 16px;
+        border-radius: 16px;
+    }
+
+    .admin-signin-company-name {
+        font-size: 20px;
+    }
+
+    .admin-signin-logo-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .admin-signin-logo-icon svg {
+        font-size: 24px;
+    }
+
+    .admin-signin-button {
+        font-size: 13px;
+        min-height: 46px;
+    }
+
+    .admin-signin-otp-inputs {
+        gap: 6px;
+    }
+
+    .admin-signin-otp-digit {
+        width: 34px;
+        height: 42px;
+        font-size: 18px;
+    }
+}
+
+/* ============================================
+   TOUCH DEVICES
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+    .admin-signin-button {
+        min-height: 56px;
+    }
+
+    .admin-signin-password-toggle {
+        padding: 12px;
+    }
+
+    .admin-signin-form-group input {
+        font-size: 16px;
+    }
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    .admin-signin-container {
+        background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    }
+
+    .admin-signin-card {
+        background: #1e293b;
+        border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .admin-signin-company-name {
+        color: #f1f5f9;
+    }
+
+    .admin-signin-company-tagline {
+        color: #94a3b8;
+    }
+
+    .admin-signin-form-group label {
+        color: #e2e8f0;
+    }
+
+    .admin-signin-form-group input {
+        background: #0f172a;
+        border-color: #334155;
+        color: #f1f5f9;
+    }
+
+    .admin-signin-form-group input:focus {
+        background: #0f172a;
+        border-color: var(--color-primary);
+    }
+
+    .admin-signin-form-group input::placeholder {
+        color: #64748b;
+    }
+
+    .admin-signin-form-group input.error {
+        border-color: var(--color-error);
+        background: #0f172a;
+    }
+
+    .admin-signin-password-toggle {
+        color: #64748b;
+    }
+
+    .admin-signin-password-toggle:hover {
+        color: var(--color-primary);
+        background: #1e293b;
+    }
+
+    .admin-signin-signup-link {
+        color: #94a3b8;
+    }
+
+    .admin-signin-signup-link a {
+        color: #60a5fa;
+    }
+
+    .admin-signin-forgot-link {
+        color: #94a3b8;
+    }
+
+    .admin-signin-forgot-link:hover {
+        color: #60a5fa;
+    }
+
+    .admin-signin-error-message {
+        background: #1e293b;
+        color: #f87171;
+        border-color: #7f1d1d;
+    }
+
+    .admin-signin-success-message {
+        background: #1e293b;
+        color: #4ade80;
+        border-color: #166534;
+    }
+
+    .admin-signin-remember-me {
+        color: #94a3b8;
+    }
+
+    .admin-signin-remember-me input[type="checkbox"] {
+        accent-color: var(--color-primary);
+    }
+
+    .admin-signin-otp-digit {
+        background: #0f172a;
+        border-color: #334155;
+        color: #f1f5f9;
+    }
+
+    .admin-signin-otp-digit:focus {
+        background: #0f172a;
+        border-color: var(--color-primary);
+    }
+
+    .admin-signin-otp-digit.error {
+        border-color: var(--color-error);
+        background: #0f172a;
+    }
+
+    .admin-signin-otp-message {
+        color: #94a3b8;
+    }
+
+    .admin-signin-otp-message strong {
+        color: #f1f5f9;
+    }
+
+    .admin-signin-back-btn {
+        border-color: #334155;
+        background: #1e293b;
+        color: #e2e8f0;
+    }
+
+    .admin-signin-back-btn:hover:not(:disabled) {
+        border-color: #475569;
+        background: #0f172a;
+    }
+
+    .admin-signin-resend-btn:hover:not(:disabled) {
+        background: #1e293b;
+    }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .admin-signin-card {
+        transition: none;
+    }
+
+    .admin-signin-logo-icon {
+        transition: none;
+    }
+
+    .admin-signin-button::before {
+        display: none;
+    }
+
+    .admin-signin-button {
+        transition: none;
+    }
+
+    .admin-signin-form-group input {
+        transition: none;
+    }
+
+    .admin-signin-password-toggle {
+        transition: none;
+    }
+}

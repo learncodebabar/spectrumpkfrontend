@@ -1,0 +1,307 @@
+/* ============================================
+   AGENT SIGN IN - Unique agent-signin- prefix
+   ============================================ */
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+.agent-signin-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eff6ff;
+    padding: 20px;
+}
+
+.agent-signin-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.agent-signin-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.agent-signin-header-icon {
+    width: 64px;
+    height: 64px;
+    background: #2563eb;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+.agent-signin-header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0 0 8px 0;
+}
+
+.agent-signin-header p {
+    color: #718096;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* ============================================
+   FORM
+   ============================================ */
+.agent-signin-form-group {
+    margin-bottom: 20px;
+}
+
+.agent-signin-form-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 8px;
+}
+
+.agent-signin-input-icon {
+    color: #2563eb;
+    font-size: 13px;
+}
+
+.agent-signin-form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: all 0.2s;
+    outline: none;
+    background: #ffffff;
+    color: #1a202c;
+}
+
+.agent-signin-form-group input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.agent-signin-form-group input.error {
+    border-color: #fc8181;
+}
+
+.agent-signin-form-group input:disabled {
+    background: #f7fafc;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   PASSWORD WRAPPER
+   ============================================ */
+.agent-signin-password-wrapper {
+    position: relative;
+}
+
+.agent-signin-password-wrapper input {
+    padding-right: 44px;
+}
+
+.agent-signin-password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #a0aec0;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+    font-size: 16px;
+}
+
+.agent-signin-password-toggle:hover:not(:disabled) {
+    color: #2563eb;
+}
+
+.agent-signin-password-toggle:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* ============================================
+   FORM OPTIONS
+   ============================================ */
+.agent-signin-form-options {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    margin-top: -8px;
+}
+
+.agent-signin-forgot-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.agent-signin-forgot-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+/* ============================================
+   SUBMIT BUTTON
+   ============================================ */
+.agent-signin-button {
+    width: 100%;
+    padding: 14px;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.2s;
+    margin-top: 8px;
+}
+
+.agent-signin-button:hover:not(:disabled) {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+.agent-signin-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   SPINNER
+   ============================================ */
+.agent-signin-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    animation: agentSigninSpin 0.8s linear infinite;
+    display: inline-block;
+}
+
+@keyframes agentSigninSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ============================================
+   MESSAGES
+   ============================================ */
+.agent-signin-success-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-left: 4px solid #48bb78;
+    border-radius: 10px;
+    color: #22543d;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.agent-signin-success-message svg {
+    color: #48bb78;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.agent-signin-error-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: #fff5f5;
+    border: 1px solid #fed7d7;
+    border-left: 4px solid #e53e3e;
+    border-radius: 10px;
+    color: #c53030;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.agent-signin-error-message svg {
+    color: #e53e3e;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.agent-signin-error-text {
+    display: block;
+    color: #e53e3e;
+    font-size: 12px;
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+/* ============================================
+   SIGN UP LINK
+   ============================================ */
+.agent-signin-signup-link {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #718096;
+}
+
+.agent-signin-signup-link a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.agent-signin-signup-link a:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+    .agent-signin-card {
+        padding: 28px 20px;
+    }
+
+    .agent-signin-header h1 {
+        font-size: 22px;
+    }
+
+    .agent-signin-header-icon {
+        width: 56px;
+        height: 56px;
+    }
+}

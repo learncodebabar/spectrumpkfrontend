@@ -1,0 +1,630 @@
+/* ============================================
+   AGENT SIDEBAR - Complete Fresh CSS
+   Prefix: agent_sidebar_
+   Mobile: White background only, NO icon-only state
+   ============================================ */
+
+/* ============================================
+   BASE SIDEBAR
+   ============================================ */
+.agent_sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh; /* dynamic viewport height — fixes mobile short-screen black leak */
+    width: 100%;
+    background: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    color: #1a202c;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    isolation: isolate; /* prevents parent dark bg from bleeding through */
+}
+
+/* ============================================
+   DESKTOP MODE
+   ============================================ */
+.agent_sidebar_desktop {
+    width: 100%;
+}
+
+/* ============================================
+   MOBILE MODE
+   ============================================ */
+.agent_sidebar_mobile {
+    width: 100%;
+    background: #ffffff;
+    border-right: none;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.agent_sidebar_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 20px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    min-height: 76px;
+    flex-shrink: 0;
+    background: #ffffff;
+}
+
+.agent_sidebar_logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    overflow: hidden;
+    flex: 1;
+    min-width: 0;
+}
+
+.agent_sidebar_logo_icon_wrapper {
+    width: 42px;
+    height: 42px;
+    background: #2563eb;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.agent_sidebar_logo_icon {
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.agent_sidebar_title_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.agent_sidebar_title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #1a202c;
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+    white-space: nowrap;
+}
+
+.agent_sidebar_subtitle {
+    font-size: 11px;
+    font-weight: 600;
+    color: #2563eb;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+}
+
+/* ============================================
+   MOBILE: CLOSE (X) BUTTON
+   ============================================ */
+.agent_sidebar_close_btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.agent_sidebar_close_btn:hover {
+    background: #dc2626;
+    color: #ffffff;
+    border-color: #dc2626;
+    transform: rotate(90deg) scale(1.05);
+}
+
+.agent_sidebar_close_btn:active {
+    transform: rotate(90deg) scale(0.95);
+}
+
+/* ============================================
+   AGENT USER CARD
+   ============================================ */
+.agent_sidebar_user_card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 16px;
+    margin: 8px 12px;
+    background: linear-gradient(135deg, #eff6ff, #eef2ff);
+    border-radius: 12px;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    flex-shrink: 0;
+}
+
+.agent_sidebar_user_avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.agent_sidebar_user_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.agent_sidebar_user_initials {
+    font-family: 'Poppins', sans-serif;
+}
+
+.agent_sidebar_user_info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+    flex: 1;
+}
+
+.agent_sidebar_user_name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1a202c;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+}
+
+.agent_sidebar_user_email {
+    font-size: 0.72rem;
+    color: #718096;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ============================================
+   MENU
+   ============================================ */
+.agent_sidebar_menu {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 16px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: #ffffff;
+    -webkit-overflow-scrolling: touch;
+}
+
+.agent_sidebar_menu::-webkit-scrollbar {
+    width: 4px;
+}
+
+.agent_sidebar_menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.agent_sidebar_menu::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 2px;
+}
+
+.agent_sidebar_menu::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e0;
+}
+
+.agent_sidebar_menu_item_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   MENU ITEMS
+   ============================================ */
+.agent_sidebar_menu_item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: #4a5568;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    white-space: nowrap;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+}
+
+.agent_sidebar_menu_item:hover {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.agent_sidebar_menu_active {
+    background: #2563eb !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.agent_sidebar_expanded {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.agent_sidebar_menu_icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+}
+
+.agent_sidebar_menu_text {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.agent_sidebar_menu_arrow {
+    font-size: 12px;
+    color: #a0aec0;
+    transition: transform 0.3s;
+}
+
+.agent_sidebar_menu_active .agent_sidebar_menu_arrow {
+    color: #ffffff;
+}
+
+/* ============================================
+   SUBMENU
+   ============================================ */
+.agent_sidebar_submenu {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 0 4px 20px;
+    animation: agent_sidebar_slide_down 0.2s ease;
+}
+
+@keyframes agent_sidebar_slide_down {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.agent_sidebar_submenu_item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    color: #718096;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Poppins', sans-serif;
+}
+
+.agent_sidebar_submenu_item:hover {
+    background: #f7fafc;
+    color: #2563eb;
+    padding-left: 18px;
+}
+
+.agent_sidebar_submenu_active {
+    background: #eff6ff !important;
+    color: #2563eb !important;
+    font-weight: 600 !important;
+}
+
+.agent_sidebar_submenu_dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #cbd5e0;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.agent_sidebar_submenu_active .agent_sidebar_submenu_dot {
+    background: #2563eb;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.agent_sidebar_footer {
+    padding: 16px 12px;
+    border-top: 1px solid #e2e8f0;
+    flex-shrink: 0;
+    background: #ffffff;
+}
+
+.agent_sidebar_logout_btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 14px;
+    background: #fff5f5;
+    color: #e53e3e;
+    border: 1px solid #fed7d7;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: 'Poppins', sans-serif;
+}
+
+.agent_sidebar_logout_btn:hover {
+    background: #e53e3e;
+    color: #ffffff;
+    border-color: #e53e3e;
+    transform: translateX(2px);
+    box-shadow: 0 4px 12px rgba(229, 62, 62, 0.25);
+}
+
+.agent_sidebar_logout_icon_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    flex-shrink: 0;
+}
+
+.agent_sidebar_logout_icon {
+    font-size: 16px;
+}
+
+.agent_sidebar_logout_text {
+    flex: 1;
+    text-align: left;
+}
+
+/* ============================================
+   DESKTOP COLLAPSED STATE (icon-only, 80px)
+   This is handled by the layout container width,
+   so we just hide text elements here.
+   ============================================ */
+.agent_sidebar_closed .agent_sidebar_title_wrapper,
+.agent_sidebar_closed .agent_sidebar_user_info,
+.agent_sidebar_closed .agent_sidebar_menu_text,
+.agent_sidebar_closed .agent_sidebar_menu_arrow,
+.agent_sidebar_closed .agent_sidebar_logout_text {
+    display: none;
+}
+
+.agent_sidebar_closed .agent_sidebar_header {
+    justify-content: center;
+    padding: 20px 8px;
+}
+
+.agent_sidebar_closed .agent_sidebar_logo {
+    justify-content: center;
+}
+
+.agent_sidebar_closed .agent_sidebar_user_card {
+    justify-content: center;
+    padding: 12px 8px;
+    margin: 8px 8px;
+}
+
+.agent_sidebar_closed .agent_sidebar_menu_item {
+    justify-content: center;
+    padding: 12px 8px;
+}
+
+.agent_sidebar_closed .agent_sidebar_logout_btn {
+    justify-content: center;
+    padding: 12px 8px;
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+    .agent_sidebar_mobile {
+        width: 100%;
+        background: #ffffff;
+        border-right: none;
+    }
+
+    .agent_sidebar_header {
+        padding: 16px 20px;
+        min-height: 70px;
+    }
+
+    .agent_sidebar_title {
+        font-size: 17px;
+    }
+
+    .agent_sidebar_user_card {
+        margin: 8px 16px;
+        padding: 14px;
+    }
+
+    .agent_sidebar_menu {
+        padding: 16px 20px;
+    }
+
+    .agent_sidebar_menu_item {
+        padding: 14px 16px;
+        font-size: 15px;
+    }
+
+    .agent_sidebar_submenu_item {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .agent_sidebar_submenu {
+        padding-left: 24px;
+    }
+
+    .agent_sidebar_footer {
+        padding: 16px 20px;
+    }
+
+    .agent_sidebar_logout_btn {
+        padding: 14px 16px;
+        font-size: 15px;
+    }
+
+    /* On mobile, always show text (never collapsed) */
+    .agent_sidebar_mobile .agent_sidebar_title_wrapper,
+    .agent_sidebar_mobile .agent_sidebar_user_info,
+    .agent_sidebar_mobile .agent_sidebar_menu_text,
+    .agent_sidebar_mobile .agent_sidebar_menu_arrow,
+    .agent_sidebar_mobile .agent_sidebar_logout_text {
+        display: flex;
+    }
+}
+
+@media (max-width: 480px) {
+    .agent_sidebar_header {
+        padding: 14px 16px;
+    }
+
+    .agent_sidebar_logo_icon_wrapper {
+        width: 38px;
+        height: 38px;
+    }
+
+    .agent_sidebar_logo_icon {
+        font-size: 18px;
+    }
+
+    .agent_sidebar_title {
+        font-size: 16px;
+    }
+
+    .agent_sidebar_close_btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+    }
+
+    .agent_sidebar_user_card {
+        margin: 6px 12px;
+        padding: 12px;
+    }
+
+    .agent_sidebar_user_avatar {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+
+    .agent_sidebar_menu {
+        padding: 14px 16px;
+    }
+
+    .agent_sidebar_menu_item {
+        padding: 13px 14px;
+        font-size: 14px;
+    }
+
+    .agent_sidebar_submenu_item {
+        padding: 11px 14px;
+        font-size: 13px;
+    }
+
+    .agent_sidebar_footer {
+        padding: 14px 16px;
+    }
+
+    .agent_sidebar_logout_btn {
+        padding: 13px 14px;
+        font-size: 14px;
+    }
+}
+
+/* ============================================
+   LANDSCAPE MOBILE
+   ============================================ */
+@media (max-height: 600px) and (orientation: landscape) {
+    .agent_sidebar_header {
+        padding: 12px 16px;
+        min-height: 60px;
+    }
+
+    .agent_sidebar_user_card {
+        padding: 10px;
+        margin: 6px 12px;
+    }
+
+    .agent_sidebar_logo_icon_wrapper {
+        width: 36px;
+        height: 36px;
+    }
+
+    .agent_sidebar_menu {
+        padding: 10px 16px;
+    }
+
+    .agent_sidebar_menu_item {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .agent_sidebar_footer {
+        padding: 10px 16px;
+    }
+
+    .agent_sidebar_logout_btn {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+}
+
+/* ============================================
+   PRINT
+   ============================================ */
+@media print {
+    .agent_sidebar,
+    .agent_sidebar_close_btn {
+        display: none !important;
+    }
+}
