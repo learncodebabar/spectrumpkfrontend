@@ -668,7 +668,7 @@ const AdminViewApplication = () => {
                         <h2>Statement</h2>
                     </div>
                     <div className="statement-block">
-                        <span className="info-label">Why does this student deserve this scholarship?</span>
+                        <span className="info-label">Why does this student deserve this SpecTrum PK?</span>
                         <p className="statement-text">{application.statement?.whyDeserve || 'N/A'}</p>
                     </div>
                     {application.statement?.achievements && (

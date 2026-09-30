@@ -394,7 +394,7 @@ const Payments = () => {
                 </table>
 
                 <div class="footer">
-                    <p>© ${new Date().getFullYear()} Scholarship Portal - Payment Report</p>
+                    <p>© ${new Date().getFullYear()} SpecTrum PK Portal - Payment Report</p>
                 </div>
 
                 <script>

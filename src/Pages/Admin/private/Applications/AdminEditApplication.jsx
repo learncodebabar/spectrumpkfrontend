@@ -900,7 +900,7 @@ const AdminEditApplication = () => {
                     <div className="form-section">
                         <h3 className="section-title"><FaFileAlt className="section-icon" /> Statement</h3>
                         <div className="form-group">
-                            <label>Why does this student deserve this scholarship?</label>
+                            <label>Why does this student deserve this SpecTrum PK?</label>
                             <textarea name="whyDeserve" rows="5" value={formData.whyDeserve} onChange={handleChange} />
                         </div>
                         <div className="form-group">

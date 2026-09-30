@@ -674,7 +674,7 @@ const StudentApplication = () => {
                         <FaUserGraduate className="header-icon" />
                     </div>
                     <div>
-                        <h1>Student Scholarship Application</h1>
+                        <h1>Student SpecTrum PK Application</h1>
                         <p>Fill student details and submit on behalf of agent</p>
                     </div>
                 </div>

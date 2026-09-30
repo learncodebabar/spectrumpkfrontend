@@ -379,7 +379,7 @@ const AgentDashboard = () => {
             'pending-documents': { class: 'agent-dashboard-badge-pending', label: 'Pending' },
             'approved': { class: 'agent-dashboard-badge-approved', label: 'Approved' },
             'rejected': { class: 'agent-dashboard-badge-rejected', label: 'Rejected' },
-            'scholarship-disbursed': { class: 'agent-dashboard-badge-disbursed', label: 'Disbursed' }
+            'SpecTrum PK-disbursed': { class: 'agent-dashboard-badge-disbursed', label: 'Disbursed' }
         };
         const c = map[status] || map['submitted'];
         return <span className={`agent-dashboard-mini-badge ${c.class}`}>{c.label}</span>;
