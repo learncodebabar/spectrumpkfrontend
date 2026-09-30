@@ -18,7 +18,6 @@ import UniversityDetail from './Pages/Admin/private/Universities/UniversityDetai
 import Programs from './Pages/Admin/private/Programs/Programs';
 import AddProgram from './Pages/Admin/private/Programs/AddProgram';
 import ProgramDetail from './Pages/Admin/private/Programs/ProgramDetail';
-
 // ===== ADMIN APPLICATIONS ⭐ =====
 import ViewApplications from './Pages/Admin/private/Applications/ViewApplications';
 import AdminApplications from './Pages/Admin/private/Applications/AdminApplications';
@@ -46,6 +45,9 @@ import ReceivePayment from './Pages/Admin/private/Payments/ReceivePayment';
 import AgentPayments from './Pages/Agent/Payments/AgentPayments';
 import Home from './Home/Home';
 import AgentCertificate from './Pages/Agent/private/AgentCertificate/AgentCertificate';
+import CertificatePreview from './Pages/Admin/private/CertificateSettings/CertificatePreview';
+import CertificateSettings from './Pages/Admin/private/CertificateSettings/CertificateSettings';
+import RenewalRequests from './Pages/Admin/private/CertificateSettings/RenewalRequests';
 
 function App() {
     return (
@@ -75,6 +77,7 @@ function App() {
                         <Route path="agents/pending" element={<ViewApplications />} />
                         <Route path="agents/approved" element={<ViewApplications />} />
                         <Route path="agents/rejected" element={<ViewApplications />} />
+
 <Route path="payments/receive" element={<ReceivePayment />} />
 <Route path="payments/send" element={<SendPayment />} />
 <Route path="payments" element={<Payments />} />
@@ -83,7 +86,9 @@ function App() {
                         <Route path="universities/add" element={<AddUniversity />} />
                         <Route path="universities/edit/:id" element={<AddUniversity />} />
                         <Route path="universities/:id" element={<UniversityDetail />} />
-
+                        <Route path="certificate-settings" element={<CertificateSettings />} />
+                        <Route path="/admin/renewals" element={<RenewalRequests />} />
+<Route path="certificate-preview" element={<CertificatePreview />} />
                         {/* ===== PROGRAMS ===== */}
                         <Route path="programs" element={<Programs />} />
                         <Route path="programs/add" element={<AddProgram />} />

@@ -300,7 +300,7 @@ const ViewApplication = () => {
             'pending-documents': { class: 'status-pending', label: 'Pending Documents', icon: <FaExclamationTriangle /> },
             'approved': { class: 'status-approved', label: 'Approved', icon: <FaCheckCircle /> },
             'rejected': { class: 'status-rejected', label: 'Rejected', icon: <FaTimesCircle /> },
-            'SpecTrum PK-disbursed': { class: 'status-disbursed', label: 'Scholarship Disbursed', icon: <FaCheckCircle /> }
+            'scholarship-disbursed': { class: 'status-disbursed', label: 'Scholarship Disbursed', icon: <FaCheckCircle /> }
         };
         return statusMap[status] || statusMap['submitted'];
     };
@@ -654,7 +654,7 @@ const ViewApplication = () => {
                     </div>
 
                     <div className="statement-block">
-                        <span className="info-label">Why does this student deserve this SpecTrum PK?</span>
+                        <span className="info-label">Why does this student deserve this scholarship?</span>
                         <p className="statement-text">
                             {application.statement?.whyDeserve || 'N/A'}
                         </p>

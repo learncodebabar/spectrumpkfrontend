@@ -40,10 +40,10 @@ const Home = () => {
                         <FaBuilding className="HomePage-header-icon" />
                     </div>
                     <h1 className="HomePage-title">
-                        Welcome to <span className="HomePage-title-highlight">SpecTrum PK Portal</span>
+                        Welcome to <span className="HomePage-title-highlight">Scholarship Portal</span>
                     </h1>
                     <p className="HomePage-subtitle">
-                        Manage SpecTrum PKs, applications, and payments — all in one place
+                        Manage scholarships, applications, and payments — all in one place
                     </p>
                 </div>
 
@@ -161,7 +161,7 @@ const Home = () => {
 
                 {/* ===== FOOTER ===== */}
                 <div className="HomePage-footer">
-                    <p>© {new Date().getFullYear()} SpecTrum PK Portal. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Scholarship Portal. All rights reserved.</p>
                 </div>
             </div>
         </div>

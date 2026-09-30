@@ -12,7 +12,9 @@ import {
     FaTimes,
     FaUniversity,
     FaGraduationCap,
-    FaMoneyBillWave
+    FaMoneyBillWave,
+    FaCertificate,
+    FaClock                    // ⭐ NEW — Renewals
 } from 'react-icons/fa';
 import './AdminSidebar.css';
 
@@ -22,15 +24,12 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
 
     // ===== MENU ITEMS =====
     const menuItems = [
-        // ===== DASHBOARD =====
         {
             title: 'Dashboard',
             icon: <FaTachometerAlt />,
             path: '/admin/dashboard',
             exact: true
         },
-
-        // ===== AGENTS MANAGEMENT =====
         {
             title: 'Agents',
             icon: <FaUserTie />,
@@ -42,8 +41,6 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
                 { title: 'Rejected', path: '/admin/agents/rejected' }
             ]
         },
-
-        // ===== APPLICATIONS MANAGEMENT ⭐ =====
         {
             title: 'Applications',
             icon: <FaFileAlt />,
@@ -52,8 +49,6 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
                 { title: 'All Applications', path: '/admin/applications', exact: true }
             ]
         },
-
-        // ===== PAYMENTS MANAGEMENT ⭐ =====
         {
             title: 'Payments',
             icon: <FaMoneyBillWave />,
@@ -64,8 +59,6 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
                 { title: 'Send Payment', path: '/admin/payments/send' }
             ]
         },
-
-        // ===== UNIVERSITIES =====
         {
             title: 'Universities',
             icon: <FaUniversity />,
@@ -75,8 +68,6 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
                 { title: 'Add University', path: '/admin/universities/add' }
             ]
         },
-
-        // ===== PROGRAMS =====
         {
             title: 'Programs',
             icon: <FaGraduationCap />,
@@ -85,18 +76,29 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
                 { title: 'All Programs', path: '/admin/programs', exact: true },
                 { title: 'Add Program', path: '/admin/programs/add' }
             ]
+        },
+        {
+            title: 'Certificate',
+            icon: <FaCertificate />,
+            path: '/admin/certificate-settings',
+            submenu: [
+                { title: 'Certificate Settings', path: '/admin/certificate-settings', exact: true },
+                { title: 'Preview Certificate', path: '/admin/certificate-preview' }
+            ]
+        },
+        // ⭐ RENEWALS
+        {
+            title: 'Renewals',
+            icon: <FaClock />,
+            path: '/admin/renewals',
+            exact: true
         }
     ];
 
-    // ===== TOGGLE SUBMENU =====
     const toggleSubmenu = (title) => {
-        setExpandedMenus(prev => ({
-            ...prev,
-            [title]: !prev[title]
-        }));
+        setExpandedMenus(prev => ({ ...prev, [title]: !prev[title] }));
     };
 
-    // ===== HANDLE LOGOUT =====
     const handleLogout = () => {
         if (window.confirm('Are you sure you want to logout?')) {
             localStorage.removeItem('adminToken');
@@ -107,7 +109,7 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
 
     return (
         <div className={`admin-sidebar ${isOpen ? 'admin-sidebar-open' : 'admin-sidebar-collapsed'}`}>
-            {/* ===== SIDEBAR HEADER ===== */}
+            {/* HEADER */}
             <div className="admin-sidebar-header">
                 <div className="admin-sidebar-logo">
                     <div className="admin-sidebar-logo-icon-wrapper">
@@ -120,8 +122,6 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
                         </div>
                     )}
                 </div>
-                
-                {/* Mobile close button */}
                 {isMobile && (
                     <button className="admin-sidebar-close-btn" onClick={onClose}>
                         <FaTimes />
@@ -129,12 +129,11 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
                 )}
             </div>
 
-            {/* ===== SIDEBAR MENU ===== */}
+            {/* MENU */}
             <nav className="admin-sidebar-menu">
                 {menuItems.map((item, index) => (
                     <div key={index} className="admin-sidebar-menu-item-wrapper">
                         {item.submenu ? (
-                            /* ===== MENU WITH SUBMENU ===== */
                             <>
                                 <button
                                     className={`admin-sidebar-menu-item ${expandedMenus[item.title] ? 'admin-sidebar-expanded' : ''}`}
@@ -146,23 +145,19 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
                                         <>
                                             <span className="admin-sidebar-menu-text">{item.title}</span>
                                             <span className="admin-sidebar-menu-arrow">
-                                                {expandedMenus[item.title] 
-                                                    ? <FaChevronDown /> 
-                                                    : <FaChevronRight />
-                                                }
+                                                {expandedMenus[item.title] ? <FaChevronDown /> : <FaChevronRight />}
                                             </span>
                                         </>
                                     )}
                                 </button>
 
-                                {/* Submenu */}
                                 {isOpen && expandedMenus[item.title] && (
                                     <div className="admin-sidebar-submenu">
                                         {item.submenu.map((subItem, subIndex) => (
                                             <NavLink
                                                 key={subIndex}
                                                 to={subItem.path}
-                                                className={({ isActive }) => 
+                                                className={({ isActive }) =>
                                                     `admin-sidebar-submenu-item ${isActive ? 'admin-sidebar-submenu-active' : ''}`
                                                 }
                                                 onClick={isMobile ? onClose : undefined}
@@ -176,10 +171,9 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
                                 )}
                             </>
                         ) : (
-                            /* ===== SIMPLE MENU ITEM ===== */
                             <NavLink
                                 to={item.path}
-                                className={({ isActive }) => 
+                                className={({ isActive }) =>
                                     `admin-sidebar-menu-item ${isActive ? 'admin-sidebar-menu-active' : ''}`
                                 }
                                 title={!isOpen ? item.title : ''}
@@ -194,9 +188,9 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
                 ))}
             </nav>
 
-            {/* ===== SIDEBAR FOOTER ===== */}
+            {/* FOOTER */}
             <div className="admin-sidebar-footer">
-                <button 
+                <button
                     className="admin-sidebar-logout-btn"
                     onClick={handleLogout}
                     title={!isOpen ? 'Logout' : ''}

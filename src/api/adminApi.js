@@ -5,7 +5,7 @@ const adminApi = {
     // =============================================
     // AUTHENTICATION APIs
     // =============================================
-    
+
     signup: async (userData) => {
         try {
             const response = await api.post('/admin/signup', userData);
@@ -86,7 +86,7 @@ const adminApi = {
     // =============================================
     // ADMIN PROFILE APIs
     // =============================================
-    
+
     getProfile: async (token) => {
         try {
             const response = await api.get('/admin/profile', {
@@ -242,6 +242,93 @@ const adminApi = {
             });
             return response.data;
         } catch (error) {
+            throw error;
+        }
+    },
+
+    // =============================================
+    // ⭐ CERTIFICATE SETTINGS APIs
+    // =============================================
+
+    getCertificateSettings: async () => {
+        try {
+            console.log("🎓 API - GET CERTIFICATE SETTINGS");
+            const token = localStorage.getItem('adminToken');
+            const response = await api.get('/admin/certificate-settings', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            console.log("📥 Certificate Settings:", response.data);
+            return response.data;
+        } catch (error) {
+            console.error('❌ Get Certificate Settings Error:', error.response?.data);
+            throw error;
+        }
+    },
+
+    updateCertificateSettings: async (formData) => {
+        try {
+            console.log("💾 API - UPDATE CERTIFICATE SETTINGS");
+            const token = localStorage.getItem('adminToken');
+            const response = await api.put('/admin/certificate-settings', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            console.log("📥 Update Response:", response.data);
+            return response.data;
+        } catch (error) {
+            console.error('❌ Update Certificate Settings Error:', error.response?.data);
+            throw error;
+        }
+    },
+
+    // =============================================
+    // ⭐ RENEWAL REQUESTS APIs
+    // =============================================
+
+    getRenewalRequests: async (status = 'pending') => {
+        try {
+            console.log("🔄 API - GET RENEWAL REQUESTS:", status);
+            const token = localStorage.getItem('adminToken');
+            const response = await api.get('/admin/agents/renewals', {
+                headers: { 'Authorization': `Bearer ${token}` },
+                params: { status }
+            });
+            console.log("📥 Renewal Requests:", response.data);
+            return response.data;
+        } catch (error) {
+            console.error('❌ Get Renewal Requests Error:', error.response?.data);
+            throw error;
+        }
+    },
+
+    approveRenewal: async (id, data = {}) => {
+        try {
+            console.log("✅ API - APPROVE RENEWAL:", id);
+            const token = localStorage.getItem('adminToken');
+            const response = await api.put(`/admin/agents/renewals/approve/${id}`, data, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            console.log("📥 Approve Response:", response.data);
+            return response.data;
+        } catch (error) {
+            console.error('❌ Approve Renewal Error:', error.response?.data);
+            throw error;
+        }
+    },
+
+    rejectRenewal: async (id, data) => {
+        try {
+            console.log("❌ API - REJECT RENEWAL:", id);
+            const token = localStorage.getItem('adminToken');
+            const response = await api.put(`/admin/agents/renewals/reject/${id}`, data, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            console.log("📥 Reject Response:", response.data);
+            return response.data;
+        } catch (error) {
+            console.error('❌ Reject Renewal Error:', error.response?.data);
             throw error;
         }
     },
@@ -452,7 +539,6 @@ const adminApi = {
                     headers: { 'Authorization': `Bearer ${token}` },
                     params: filters
                 });
-                console.log("📥 Applications Response:", response.data);
                 return response.data;
             } catch (error) {
                 console.error("❌ Get Applications Error:", error.response?.data);
@@ -462,35 +548,30 @@ const adminApi = {
 
         getById: async (id) => {
             try {
-                console.log("🔐 API - GET APPLICATION:", id);
                 const token = localStorage.getItem('adminToken');
                 const response = await api.get(`/admin/applications/${id}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 return response.data;
             } catch (error) {
-                console.error("❌ Get Application Error:", error.response?.data);
                 throw error;
             }
         },
 
         getStats: async () => {
             try {
-                console.log("🔐 API - GET APPLICATION STATS");
                 const token = localStorage.getItem('adminToken');
                 const response = await api.get('/admin/applications/stats', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 return response.data;
             } catch (error) {
-                console.error("❌ Get Stats Error:", error.response?.data);
                 throw error;
             }
         },
 
         update: async (id, formData) => {
             try {
-                console.log("🔐 API - UPDATE APPLICATION:", id);
                 const token = localStorage.getItem('adminToken');
                 const response = await api.put(`/admin/applications/${id}`, formData, {
                     headers: {
@@ -498,73 +579,59 @@ const adminApi = {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
-                console.log("📥 Update Response:", response.data);
                 return response.data;
             } catch (error) {
-                console.error("❌ Update Error:", error.response?.data);
                 throw error;
             }
         },
 
         delete: async (id) => {
             try {
-                console.log("🔐 API - DELETE APPLICATION:", id);
                 const token = localStorage.getItem('adminToken');
                 const response = await api.delete(`/admin/applications/${id}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
-                console.log("📥 Delete Response:", response.data);
                 return response.data;
             } catch (error) {
-                console.error("❌ Delete Error:", error.response?.data);
                 throw error;
             }
         },
 
         approve: async (id, remarks = '') => {
             try {
-                console.log("✅ API - APPROVE APPLICATION:", id);
                 const token = localStorage.getItem('adminToken');
                 const response = await api.patch(`/admin/applications/${id}/approve`,
                     { remarks },
                     { headers: { 'Authorization': `Bearer ${token}` } }
                 );
-                console.log("📥 Approve Response:", response.data);
                 return response.data;
             } catch (error) {
-                console.error("❌ Approve Error:", error.response?.data);
                 throw error;
             }
         },
 
         reject: async (id, reason) => {
             try {
-                console.log("❌ API - REJECT APPLICATION:", id);
                 const token = localStorage.getItem('adminToken');
                 const response = await api.patch(`/admin/applications/${id}/reject`,
                     { reason, remarks: reason },
                     { headers: { 'Authorization': `Bearer ${token}` } }
                 );
-                console.log("📥 Reject Response:", response.data);
                 return response.data;
             } catch (error) {
-                console.error("❌ Reject Error:", error.response?.data);
                 throw error;
             }
         },
 
         review: async (id, remarks) => {
             try {
-                console.log("🔄 API - REVIEW APPLICATION:", id);
                 const token = localStorage.getItem('adminToken');
                 const response = await api.patch(`/admin/applications/${id}/review`,
                     { remarks },
                     { headers: { 'Authorization': `Bearer ${token}` } }
                 );
-                console.log("📥 Review Response:", response.data);
                 return response.data;
             } catch (error) {
-                console.error("❌ Review Error:", error.response?.data);
                 throw error;
             }
         }
@@ -576,110 +643,68 @@ const adminApi = {
 
     payments: {
         create: async (data) => {
-            try {
-                console.log("💰 API - CREATE PAYMENT:", data.type);
-                const token = localStorage.getItem('adminToken');
-                const response = await api.post('/admin/payments', data, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                return response.data;
-            } catch (error) {
-                console.error("❌ Create Payment Error:", error.response?.data);
-                throw error;
-            }
+            const token = localStorage.getItem('adminToken');
+            const response = await api.post('/admin/payments', data, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            return response.data;
         },
-
         getAll: async (filters = {}) => {
-            try {
-                const token = localStorage.getItem('adminToken');
-                const response = await api.get('/admin/payments', {
-                    headers: { 'Authorization': `Bearer ${token}` },
-                    params: filters
-                });
-                return response.data;
-            } catch (error) {
-                console.error("❌ Get Payments Error:", error.response?.data);
-                throw error;
-            }
+            const token = localStorage.getItem('adminToken');
+            const response = await api.get('/admin/payments', {
+                headers: { 'Authorization': `Bearer ${token}` },
+                params: filters
+            });
+            return response.data;
         },
-
         getById: async (id) => {
-            try {
-                const token = localStorage.getItem('adminToken');
-                const response = await api.get(`/admin/payments/${id}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                return response.data;
-            } catch (error) {
-                throw error;
-            }
+            const token = localStorage.getItem('adminToken');
+            const response = await api.get(`/admin/payments/${id}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            return response.data;
         },
-
         update: async (id, data) => {
-            try {
-                const token = localStorage.getItem('adminToken');
-                const response = await api.put(`/admin/payments/${id}`, data, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                return response.data;
-            } catch (error) {
-                throw error;
-            }
+            const token = localStorage.getItem('adminToken');
+            const response = await api.put(`/admin/payments/${id}`, data, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            return response.data;
         },
-
         delete: async (id) => {
-            try {
-                const token = localStorage.getItem('adminToken');
-                const response = await api.delete(`/admin/payments/${id}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                return response.data;
-            } catch (error) {
-                throw error;
-            }
+            const token = localStorage.getItem('adminToken');
+            const response = await api.delete(`/admin/payments/${id}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            return response.data;
         },
-
         getStats: async (filters = {}) => {
-            try {
-                const token = localStorage.getItem('adminToken');
-                const response = await api.get('/admin/payments/stats', {
-                    headers: { 'Authorization': `Bearer ${token}` },
-                    params: filters
-                });
-                return response.data;
-            } catch (error) {
-                throw error;
-            }
+            const token = localStorage.getItem('adminToken');
+            const response = await api.get('/admin/payments/stats', {
+                headers: { 'Authorization': `Bearer ${token}` },
+                params: filters
+            });
+            return response.data;
         },
-
         getDailyReport: async (date) => {
-            try {
-                const token = localStorage.getItem('adminToken');
-                const response = await api.get('/admin/payments/daily-report', {
-                    headers: { 'Authorization': `Bearer ${token}` },
-                    params: { date }
-                });
-                return response.data;
-            } catch (error) {
-                throw error;
-            }
+            const token = localStorage.getItem('adminToken');
+            const response = await api.get('/admin/payments/daily-report', {
+                headers: { 'Authorization': `Bearer ${token}` },
+                params: { date }
+            });
+            return response.data;
         },
-
         getAgentSummary: async (agentId) => {
-            try {
-                const token = localStorage.getItem('adminToken');
-                const response = await api.get(`/admin/payments/agent/${agentId}/summary`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                return response.data;
-            } catch (error) {
-                throw error;
-            }
+            const token = localStorage.getItem('adminToken');
+            const response = await api.get(`/admin/payments/agent/${agentId}/summary`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            return response.data;
         }
     },
 
     // =============================================
-    // DASHBOARD APIs ⭐
+    // DASHBOARD APIs
     // =============================================
 
     getDashboardStats: async () => {
@@ -689,7 +714,6 @@ const adminApi = {
             const response = await api.get('/admin/dashboard/stats', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            console.log("📥 Dashboard Response:", response.data);
             return response.data;
         } catch (error) {
             console.error('❌ Dashboard Error:', error.response?.data);
@@ -700,7 +724,7 @@ const adminApi = {
     // =============================================
     // UTILITY FUNCTIONS
     // =============================================
-    
+
     logout: () => {
         localStorage.removeItem('adminToken');
         localStorage.removeItem('adminData');

@@ -260,7 +260,7 @@ const MyApplications = () => {
                             <option value="pending-documents">Pending Documents</option>
                             <option value="approved">Approved</option>
                             <option value="rejected">Rejected</option>
-                            <option value="SpecTrum PK-disbursed">Disbursed</option>
+                            <option value="scholarship-disbursed">Disbursed</option>
                         </select>
                     </div>
                 </div>

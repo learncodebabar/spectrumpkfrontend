@@ -110,7 +110,7 @@ const AdminViewApplication = () => {
             'pending-documents': { class: 'status-pending', label: 'Pending Documents', icon: <FaExclamationTriangle /> },
             'approved': { class: 'status-approved', label: 'Approved', icon: <FaCheckCircle /> },
             'rejected': { class: 'status-rejected', label: 'Rejected', icon: <FaTimesCircle /> },
-            'SpecTrum PK-disbursed': { class: 'status-disbursed', label: 'SpecTrum PK Disbursed', icon: <FaCheckCircle /> }
+            'scholarship-disbursed': { class: 'status-disbursed', label: 'Scholarship Disbursed', icon: <FaCheckCircle /> }
         };
         return statusMap[status] || statusMap['submitted'];
     };
@@ -462,7 +462,7 @@ const AdminViewApplication = () => {
 
                 {/* ===== PRINT-ONLY HEADER ===== */}
                 <div className="print-only-header">
-                    <h1>Student SpecTrum PK Application</h1>
+                    <h1>Student Scholarship Application</h1>
                     <p><strong>Application No:</strong> {application.applicationNumber}</p>
                     <p><strong>Status:</strong> {statusInfo.label}</p>
                     <p><strong>Printed On:</strong> {new Date().toLocaleString('en-IN')}</p>
@@ -668,7 +668,7 @@ const AdminViewApplication = () => {
                         <h2>Statement</h2>
                     </div>
                     <div className="statement-block">
-                        <span className="info-label">Why does this student deserve this SpecTrum PK?</span>
+                        <span className="info-label">Why does this student deserve this scholarship?</span>
                         <p className="statement-text">{application.statement?.whyDeserve || 'N/A'}</p>
                     </div>
                     {application.statement?.achievements && (
