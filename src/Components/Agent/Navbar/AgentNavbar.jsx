@@ -1,15 +1,14 @@
+// src/Layout/AgentNavbar.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { 
     FaBars, 
     FaBell, 
     FaUser, 
-    FaCog, 
     FaSignOutAlt,
     FaChevronDown,
-    FaPlus,
+    FaPlusCircle,
     FaClipboardList,
-    FaUsers,
     FaTimes
 } from 'react-icons/fa';
 import './AgentNavbar.css';
@@ -51,7 +50,7 @@ const AgentNavbar = ({ onToggleSidebar, isMobile, sidebarOpen }) => {
         }
     ]);
 
-    // ===== GET AGENT DATA =====
+    // ===== GET AGENT DATA from localStorage =====
     useEffect(() => {
         try {
             const data = localStorage.getItem('agentData');
@@ -115,11 +114,14 @@ const AgentNavbar = ({ onToggleSidebar, isMobile, sidebarOpen }) => {
 
                     {/* Quick Action Buttons */}
                     <div className="agent-navbar-actions">
-                        <Link to="/agent/students/add" className="agent-action-btn agent-action-primary">
-                            <FaUsers />
-                            <span>Add Student</span>
+                        {/* ⭐ New Application */}
+                        <Link to="/agent/student-application" className="agent-action-btn agent-action-primary">
+                            <FaPlusCircle />
+                            <span>New Application</span>
                         </Link>
-                        <Link to="/agent/applications" className="agent-action-btn agent-action-secondary">
+
+                        {/* ⭐ Applications */}
+                        <Link to="/agent/my-applications" className="agent-action-btn agent-action-secondary">
                             <FaClipboardList />
                             <span>Applications</span>
                         </Link>
@@ -227,14 +229,11 @@ const AgentNavbar = ({ onToggleSidebar, isMobile, sidebarOpen }) => {
                                     </div>
                                 </div>
 
+                                {/* ⭐ Sirf My Profile — Settings removed */}
                                 <div className="agent-profile-menu">
                                     <Link to="/agent/profile" className="agent-profile-menu-item">
                                         <FaUser />
                                         <span>My Profile</span>
-                                    </Link>
-                                    <Link to="/agent/settings" className="agent-profile-menu-item">
-                                        <FaCog />
-                                        <span>Settings</span>
                                     </Link>
                                 </div>
 

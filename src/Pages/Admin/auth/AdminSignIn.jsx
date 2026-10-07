@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminSignIn.css';
+import logo from "../../../assets/imgs/logosing/2.png"
 import adminApi from '../../../api/adminApi';
 import { 
     FaEnvelope, 
@@ -282,9 +283,10 @@ const AdminSignIn = () => {
             <div className="admin-signin-card">
                 {/* ===== LOGO SECTION ===== */}
                 <div className="admin-signin-logo-container">
-                    <div className="admin-signin-logo-icon">
+                    {/* <div className="admin-signin-logo-icon">
                         <FaBuilding size={36} color="#ffffff" />
-                    </div>
+                    </div> */}
+                    <img className='main-logo-pages' src={logo} alt="" />
                     <h1 className="admin-signin-company-name">Admin Portal</h1>
                     <p className="admin-signin-company-tagline">
                         {showOTP ? 'Verify to login' : 'Sign in to your account'}
@@ -376,7 +378,7 @@ const AdminSignIn = () => {
                                     />
                                     <span>Remember me</span>
                                 </label>
-                                <a href="/forgot-password" className="admin-signin-forgot-link">
+                                <a href="/admin/forgot-passwords" className="admin-signin-forgot-link">
                                     Forgot password?
                                 </a>
                             </div>

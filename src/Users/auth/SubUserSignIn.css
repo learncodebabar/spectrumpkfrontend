@@ -1,0 +1,383 @@
+/* src/Pages/Admin/auth/SubUserSignIn.css */
+
+/* ============================================
+   PAGE
+   ============================================ */
+.subuser-signin-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    position: relative;
+    overflow: hidden;
+    background: #f8fafc;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Background gradient */
+.subuser-signin-page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 35%, #eef2ff 70%, #faf5ff 100%);
+    background-size: 200% 200%;
+    animation: subuserSigninBgShift 20s ease infinite;
+    z-index: 0;
+}
+
+@keyframes subuserSigninBgShift {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* Floating circles */
+.subuser-signin-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.subuser-signin-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    opacity: 0.6;
+    animation: subuserSigninFloat 22s ease-in-out infinite alternate;
+}
+
+.circle-1 {
+    width: 320px;
+    height: 320px;
+    top: -80px;
+    left: -80px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.4), transparent 70%);
+}
+
+.circle-2 {
+    width: 280px;
+    height: 280px;
+    bottom: -60px;
+    right: -60px;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.4), transparent 70%);
+    animation-delay: 3s;
+}
+
+.circle-3 {
+    width: 220px;
+    height: 220px;
+    top: 40%;
+    right: 15%;
+    background: radial-gradient(circle, rgba(110, 231, 183, 0.3), transparent 70%);
+    animation-delay: 5s;
+}
+
+@keyframes subuserSigninFloat {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(40px, -50px) scale(1.1); }
+    100% { transform: translate(-30px, 30px) scale(0.95); }
+}
+
+/* ============================================
+   CARD
+   ============================================ */
+.subuser-signin-card {
+    position: relative;
+    z-index: 10;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 440px;
+    box-shadow:
+        0 30px 80px rgba(37, 99, 235, 0.10),
+        0 8px 24px rgba(15, 23, 42, 0.06),
+        0 1px 0 rgba(255, 255, 255, 0.9) inset;
+    border: 1px solid rgba(37, 99, 235, 0.08);
+    animation: subuserSigninCardIn 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes subuserSigninCardIn {
+    from { opacity: 0; transform: translateY(40px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.subuser-signin-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.subuser-signin-logo {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1.25rem;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #ffffff;
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.3);
+    animation: subuserSigninFloatIcon 4s ease-in-out infinite;
+}
+
+@keyframes subuserSigninFloatIcon {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50%      { transform: translateY(-8px) rotate(3deg); }
+}
+
+.subuser-signin-header h1 {
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 0.4rem;
+    letter-spacing: -0.4px;
+}
+
+.subuser-signin-header p {
+    font-size: 0.92rem;
+    color: #64748b;
+    margin: 0;
+}
+
+/* ============================================
+   ERROR
+   ============================================ */
+.subuser-signin-error {
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+    border-left: 4px solid #dc2626;
+    font-size: 0.88rem;
+    animation: subuserSigninShake 0.4s ease;
+}
+
+@keyframes subuserSigninShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+.subuser-signin-error svg {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   FORM
+   ============================================ */
+.subuser-signin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.subuser-signin-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.subuser-signin-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.subuser-signin-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.subuser-signin-input-icon {
+    position: absolute;
+    left: 15px;
+    color: #94a3b8;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: color 0.2s;
+}
+
+.subuser-signin-input-wrap input {
+    width: 100%;
+    padding: 0.85rem 1rem 0.85rem 2.75rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    background: #ffffff;
+    color: #0f172a;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.subuser-signin-input-wrap input::placeholder {
+    color: #94a3b8;
+}
+
+.subuser-signin-input-wrap input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.subuser-signin-input-wrap input:focus ~ .subuser-signin-input-icon {
+    color: #2563eb;
+}
+
+.subuser-signin-input-wrap input:disabled {
+    background: #f8fafc;
+    cursor: not-allowed;
+}
+
+/* Password toggle */
+.subuser-signin-pw-toggle {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 0.4rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+    border-radius: 6px;
+}
+
+.subuser-signin-pw-toggle:hover:not(:disabled) {
+    color: #0f172a;
+    background: #f1f5f9;
+}
+
+.subuser-signin-pw-toggle:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   BUTTON
+   ============================================ */
+.subuser-signin-btn {
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8, #7c3aed);
+    background-size: 200% 200%;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-family: inherit;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+    animation: subuserSigninBtnShift 4s ease infinite;
+}
+
+@keyframes subuserSigninBtnShift {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+.subuser-signin-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(37, 99, 235, 0.5);
+}
+
+.subuser-signin-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.subuser-signin-spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #ffffff;
+    animation: subuserSigninSpin 0.8s linear infinite;
+}
+
+@keyframes subuserSigninSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.subuser-signin-footer {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #f1f5f9;
+    text-align: center;
+}
+
+.subuser-signin-footer p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #64748b;
+}
+
+.subuser-signin-footer a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.subuser-signin-footer a:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 480px) {
+    .subuser-signin-page {
+        padding: 1rem;
+    }
+
+    .subuser-signin-card {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
+
+    .subuser-signin-header h1 {
+        font-size: 1.4rem;
+    }
+
+    .subuser-signin-logo {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .subuser-signin-page::before,
+    .subuser-signin-circle,
+    .subuser-signin-logo,
+    .subuser-signin-btn {
+        animation: none !important;
+    }
+}

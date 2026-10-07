@@ -15,6 +15,9 @@ import {
     FaCheckCircle
 } from 'react-icons/fa';
 
+
+ import logo from "../../src/assets/imgs/logosing/2.png"
+
 const Home = () => {
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
@@ -36,14 +39,15 @@ const Home = () => {
 
                 {/* ===== HEADER ===== */}
                 <div className="HomePage-header">
-                    <div className="HomePage-header-icon-wrapper">
+                    {/* <div className="HomePage-header-icon-wrapper">
                         <FaBuilding className="HomePage-header-icon" />
-                    </div>
+                    </div> */}
+                    <img className='main-logo-web' src={logo} alt="" />
                     <h1 className="HomePage-title">
                         Welcome to <span className="HomePage-title-highlight">SpecTrum PK Portal</span>
                     </h1>
                     <p className="HomePage-subtitle">
-                        Manage SpecTrum PK, applications, and payments — all in one place
+                        Manage scholarships, applications, and payments — all in one place
                     </p>
                 </div>
 

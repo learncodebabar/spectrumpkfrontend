@@ -1008,4 +1008,246 @@
 .agent-signup-read-check span {
     font-weight: 600;
     color: #92400e;
+}/* ============================================ */
+/* TERMS PDF BUTTONS — FIXED                    */
+/* ============================================ */
+
+.agent-signup-terms-group .agent-signup-terms-pdf .agent-signup-pdf-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff !important;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none !important;
+    font-family: inherit;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    white-space: nowrap;
+    line-height: 1.2;
+}
+
+/* Hover — रंग नीला ही रहे, कोई underline नहीं */
+.agent-signup-terms-group .agent-signup-terms-pdf .agent-signup-pdf-link:hover {
+    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+
+/* Active */
+.agent-signup-terms-group .agent-signup-terms-pdf .agent-signup-pdf-link:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+/* Focus */
+.agent-signup-terms-group .agent-signup-terms-pdf .agent-signup-pdf-link:focus {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    outline: 3px solid rgba(37, 99, 235, 0.3);
+    outline-offset: 2px;
+}
+
+/* Focus visible */
+.agent-signup-terms-group .agent-signup-terms-pdf .agent-signup-pdf-link:focus-visible {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    outline: 3px solid rgba(37, 99, 235, 0.4);
+    outline-offset: 2px;
+}
+
+/* Visited — ताकि visited link भी लाल/बैंगनी न हो */
+.agent-signup-terms-group .agent-signup-terms-pdf .agent-signup-pdf-link:visited {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+/* ============================================ */
+/* DOWNLOAD BUTTON (purple accent)              */
+/* ============================================ */
+.agent-signup-terms-group .agent-signup-terms-pdf .agent-signup-pdf-download {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+.agent-signup-terms-group .agent-signup-terms-pdf .agent-signup-pdf-download:hover {
+    background: linear-gradient(135deg, #6d28d9, #5b21b6);
+    color: #ffffff !important;
+    text-decoration: none !important;
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+}
+
+.agent-signup-terms-group .agent-signup-terms-pdf .agent-signup-pdf-download:visited {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+/* ============================================ */
+/* AGREE TERMS CHECKBOX LABEL                   */
+/* ============================================ */
+.agent-signup-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.88rem;
+    color: #0f172a;
+    cursor: pointer;
+    line-height: 1.6;
+    padding: 12px 14px;
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1.5px solid #e2e8f0;
+    transition: all 0.25s ease;
+    user-select: none;
+}
+
+.agent-signup-checkbox-label:hover {
+    border-color: #cbd5e1;
+    background: #f1f5f9;
+}
+
+/* Checkbox — custom blue theme */
+.agent-signup-checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    accent-color: #2563eb;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.agent-signup-checkbox-label input[type="checkbox"]:hover {
+    transform: scale(1.1);
+}
+
+.agent-signup-checkbox-label input[type="checkbox"]:checked {
+    transform: scale(1.05);
+}
+
+/* Error state — अगर checkbox tick न हो */
+.agent-signup-checkbox-label input[type="checkbox"].error {
+    outline: 2px solid #dc2626;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Text span */
+.agent-signup-checkbox-label > span {
+    flex: 1;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+/* ============================================ */
+/* INLINE LINKS — Terms & Privacy Policy        */
+/* ============================================ */
+.agent-signup-inline-link {
+    background: none;
+    border: none;
+    color: #2563eb;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1.5px;
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: inherit;
+    display: inline;
+    transition: all 0.2s ease;
+}
+
+.agent-signup-inline-link:hover {
+    color: #1d4ed8;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #1d4ed8;
+}
+
+.agent-signup-inline-link:focus-visible {
+    outline: 2px solid rgba(37, 99, 235, 0.4);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+/* ============================================ */
+/* READ PROPERLY CHECKBOX (दूसरा वाला)          */
+/* ============================================ */
+.agent-signup-read-check {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: #fffbeb;
+    border-radius: 10px;
+    border: 1.5px solid #fde68a;
+    border-left: 4px solid #f59e0b;
+    transition: all 0.25s ease;
+}
+
+.agent-signup-read-check:hover {
+    background: #fef3c7;
+    border-color: #fcd34d;
+    border-left-color: #d97706;
+}
+
+.agent-signup-read-check input[type="checkbox"] {
+    accent-color: #f59e0b;
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+}
+
+.agent-signup-read-check input[type="checkbox"]:hover {
+    transform: scale(1.1);
+}
+
+.agent-signup-read-check > span {
+    font-weight: 600;
+    color: #92400e;
+    font-size: 0.88rem;
+    line-height: 1.55;
+}
+
+/* Error state for read checkbox */
+.agent-signup-read-check input[type="checkbox"].error {
+    outline: 2px solid #dc2626;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ============================================ */
+/* RESPONSIVE                                   */
+/* ============================================ */
+@media (max-width: 480px) {
+    .agent-signup-checkbox-label {
+        padding: 10px 12px;
+        gap: 0.6rem;
+    }
+    
+    .agent-signup-checkbox-label > span {
+        font-size: 0.83rem;
+    }
+    
+    .agent-signup-inline-link {
+        font-weight: 600;
+    }
+    
+    .agent-signup-read-check {
+        padding: 10px 12px;
+    }
+    
+    .agent-signup-read-check > span {
+        font-size: 0.83rem;
+    }
 }

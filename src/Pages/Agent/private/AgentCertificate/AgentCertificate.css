@@ -14,6 +14,7 @@
     position: relative;
     font-family: 'EB Garamond', Georgia, serif;
 }
+
 /* ============================================
    ⭐ COUNTDOWN BAR (below certificate)
    ============================================ */
@@ -101,7 +102,7 @@
 }
 
 /* ============================================
-   ⭐ EXPIRED CARD (jab certificate hidden ho)
+   ⭐ EXPIRED CARD
    ============================================ */
 .agent-cert-expired-card {
     max-width: 600px;
@@ -175,7 +176,6 @@
     cursor: not-allowed;
 }
 
-/* Responsive */
 @media (max-width: 640px) {
     .agent-cert-countdown-bar {
         flex-direction: column;
@@ -193,13 +193,13 @@
     }
 }
 
-/* Hide in print */
 @media print {
     .agent-cert-countdown-bar,
     .agent-cert-expired-card {
         display: none !important;
     }
 }
+
 /* ============================================
    LOADING
    ============================================ */
@@ -226,7 +226,7 @@
 }
 
 /* ============================================
-   STATUS CARD (Pending / Rejected)
+   STATUS CARD
    ============================================ */
 .agent-cert-status-card {
     max-width: 520px;
@@ -419,7 +419,7 @@
 }
 
 /* ============================================
-   TITLE — Cinzel Decorative
+   TITLE
    ============================================ */
 .agent-cert-title {
     font-family: 'Cinzel Decorative', 'Cinzel', Georgia, serif;
@@ -434,7 +434,7 @@
 }
 
 /* ============================================
-   INTRO — Poppins
+   INTRO
    ============================================ */
 .agent-cert-body-text {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -446,7 +446,7 @@
 }
 
 /* ============================================
-   AGENT NAME — Poppins Bold
+   AGENT NAME
    ============================================ */
 .agent-cert-name {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -473,7 +473,7 @@
 }
 
 /* ============================================
-   DESCRIPTION — EB Garamond italic
+   DESCRIPTION
    ============================================ */
 .agent-cert-description {
     font-family: 'EB Garamond', Georgia, serif;
@@ -506,7 +506,7 @@
 }
 
 /* ============================================
-   FOOTER — Signature | Seal | Date
+   FOOTER
    ============================================ */
 .agent-cert-footer {
     display: grid;
@@ -525,11 +525,23 @@
     gap: 5px;
 }
 
+/* ============================================
+   ⭐ SIGNATURE — default (Agent)
+   ============================================ */
 .agent-cert-signature-img {
     max-height: 50px;
     max-width: 160px;
     object-fit: contain;
     margin-bottom: 4px;
+}
+
+/* ⭐⭐⭐ ADMIN SIGNATURE — bada size ⭐⭐⭐ */
+.agent-cert-signature-admin {
+    max-height: 90px !important;
+    max-width: 220px !important;
+    object-fit: contain;
+    margin-bottom: -60px;
+    /* margin-top: -px; */
 }
 
 .agent-cert-signature-placeholder {
@@ -703,6 +715,13 @@
     .agent-cert-footer-line { width: 100px; }
 
     .agent-cert-footer-label { font-size: 0.65rem; }
+
+    /* Admin signature — thoda chhota mobile pe */
+    .agent-cert-signature-admin {
+        max-height: 65px !important;
+        max-width: 160px !important;
+        margin-top: -10px;
+    }
 
     .agent-cert-id-strip {
         flex-direction: column;

@@ -88,3 +88,17 @@ code {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
 }
+
+
+.main-logo-web{
+    height: 200px;
+    width: 300px;
+}
+.main-logo-pages{
+    height: 100px;
+    width: 150px;
+}
+.sidbar-logo-admin{
+    width: 200px;
+    width: 200px;
+}

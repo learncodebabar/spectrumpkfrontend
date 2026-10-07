@@ -3,10 +3,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
     FaSave, FaUpload, FaLink, FaTimes, FaSpinner,
     FaImage, FaEye, FaCheckCircle, FaExclamationTriangle,
-    FaCertificate, FaSignature, FaPalette
+    FaCertificate, FaSignature, FaPalette, FaUndo
 } from 'react-icons/fa';
 import adminApi from '../../../../api/adminApi';
 import { getFileUrl } from '../../../../api/config';
+import logos from '../../../../assets/imgs/logosing/logomain.png';
+import singh from '../../../../assets/imgs/logosing/1.png';
 import './CertificateSettings.css';
 
 const CertificateSettings = () => {
@@ -37,9 +39,11 @@ const CertificateSettings = () => {
     const [logoPreview, setLogoPreview] = useState('');
     const [logoMode, setLogoMode] = useState('upload');
     const [logoUrl, setLogoUrl] = useState('');
+    const [useCustomLogo, setUseCustomLogo] = useState(false);  // ⭐
 
     const [signatureFile, setSignatureFile] = useState(null);
     const [signaturePreview, setSignaturePreview] = useState('');
+    const [useCustomSignature, setUseCustomSignature] = useState(false);  // ⭐
 
     const showToast = (msg, type = 'success') => {
         setToast({ show: true, msg, type });
@@ -73,14 +77,25 @@ const CertificateSettings = () => {
                     borderTheme: s.borderTheme || 'navy-gold'
                 });
 
+                // ⭐ Custom logo check
                 if (s.logo) {
                     setLogoPreview(getFileUrl(s.logo));
                     setLogoMode(s.logoSource === 'url' ? 'url' : 'upload');
                     setLogoUrl(s.logoSource === 'url' ? s.logo : '');
+                    setUseCustomLogo(true);
+                } else {
+                    // Default logo
+                    setLogoPreview(logos);
+                    setUseCustomLogo(false);
                 }
 
+                // ⭐ Custom signature check
                 if (s.signatureImage) {
                     setSignaturePreview(getFileUrl(s.signatureImage));
+                    setUseCustomSignature(true);
+                } else {
+                    setSignaturePreview(singh);
+                    setUseCustomSignature(false);
                 }
             }
         } catch (err) {
@@ -102,19 +117,27 @@ const CertificateSettings = () => {
         setLogoFile(file);
         setLogoPreview(URL.createObjectURL(file));
         setLogoUrl('');
+        setUseCustomLogo(true);
     };
 
     const removeLogo = () => {
         setLogoFile(null);
-        setLogoPreview('');
+        setLogoPreview(logos);   // ⭐ Default pe wapas
         setLogoUrl('');
+        setUseCustomLogo(false);
         if (logoInputRef.current) logoInputRef.current.value = '';
+        showToast('Reverted to default logo', 'success');
     };
 
     const handleLogoModeSwitch = (mode) => {
         setLogoMode(mode);
-        if (mode === 'upload') setLogoUrl('');
-        else removeLogo();
+        if (mode === 'upload') {
+            setLogoUrl('');
+        } else {
+            setLogoFile(null);
+            setLogoPreview('');
+            setUseCustomLogo(false);
+        }
     };
 
     // ===== SIGNATURE =====
@@ -124,12 +147,15 @@ const CertificateSettings = () => {
         if (file.size > 2 * 1024 * 1024) return showToast('Signature max 2MB', 'error');
         setSignatureFile(file);
         setSignaturePreview(URL.createObjectURL(file));
+        setUseCustomSignature(true);
     };
 
     const removeSignature = () => {
         setSignatureFile(null);
-        setSignaturePreview('');
+        setSignaturePreview(singh);   // ⭐ Default pe wapas
+        setUseCustomSignature(false);
         if (signatureInputRef.current) signatureInputRef.current.value = '';
+        showToast('Reverted to default signature', 'success');
     };
 
     // ===== SAVE =====
@@ -140,15 +166,28 @@ const CertificateSettings = () => {
             const fd = new FormData();
             Object.entries(form).forEach(([k, v]) => fd.append(k, v));
 
-            if (logoFile) fd.append('logo', logoFile);
-            if (logoMode === 'url' && logoUrl) fd.append('logoUrl', logoUrl);
-            if (logoMode === 'upload' && !logoFile && !logoPreview) fd.append('logoUrl', '');
+            // ⭐ Logo logic
+            if (logoFile) {
+                fd.append('logo', logoFile);
+            } else if (logoMode === 'url' && logoUrl) {
+                fd.append('logoUrl', logoUrl);
+            } else if (!useCustomLogo) {
+                // User cleared custom logo → send empty to reset to default
+                fd.append('logoUrl', '');
+            }
 
-            if (signatureFile) fd.append('signatureImage', signatureFile);
+            // ⭐ Signature logic
+            if (signatureFile) {
+                fd.append('signatureImage', signatureFile);
+            } else if (!useCustomSignature) {
+                // User cleared signature → reset to default (send empty marker)
+                fd.append('resetSignature', 'true');
+            }
 
             const res = await adminApi.updateCertificateSettings(fd);
             if (res.success) {
                 showToast('✅ Certificate settings saved!', 'success');
+                fetchSettings();  // refresh
             }
         } catch (err) {
             showToast(err.response?.data?.message || 'Save failed', 'error');
@@ -220,9 +259,17 @@ const CertificateSettings = () => {
                         </div>
                     </div>
 
-                    {/* LOGO */}
+                    {/* ⭐ LOGO — with default */}
                     <div className="cert-settings-group">
-                        <label>Logo</label>
+                        <label>
+                            Logo
+                            {!useCustomLogo && (
+                                <span className="cert-settings-default-badge">
+                                    Using Default
+                                </span>
+                            )}
+                        </label>
+
                         <div className="cert-settings-file-mode-toggle">
                             <button
                                 type="button"
@@ -257,13 +304,16 @@ const CertificateSettings = () => {
                                 ) : (
                                     <div className="cert-settings-preview-box">
                                         <img src={logoPreview} alt="Logo" />
-                                        <button
-                                            type="button"
-                                            className="cert-settings-remove"
-                                            onClick={removeLogo}
-                                        >
-                                            <FaTimes />
-                                        </button>
+                                        {useCustomLogo && (
+                                            <button
+                                                type="button"
+                                                className="cert-settings-remove"
+                                                onClick={removeLogo}
+                                                title="Revert to default logo"
+                                            >
+                                                <FaUndo />
+                                            </button>
+                                        )}
                                     </div>
                                 )}
                             </div>
@@ -276,8 +326,19 @@ const CertificateSettings = () => {
                                 onChange={(e) => {
                                     setLogoUrl(e.target.value);
                                     setLogoPreview(e.target.value);
+                                    setUseCustomLogo(!!e.target.value);
                                 }}
                             />
+                        )}
+
+                        {useCustomLogo && logoMode === 'upload' && (
+                            <button
+                                type="button"
+                                className="cert-settings-revert-btn"
+                                onClick={removeLogo}
+                            >
+                                <FaUndo /> Revert to default logo
+                            </button>
                         )}
                     </div>
                 </div>
@@ -415,20 +476,35 @@ const CertificateSettings = () => {
                         </div>
                     </div>
 
+                    {/* ⭐ SIGNATURE — with default */}
                     <div className="cert-settings-group">
-                        <label>Signature Image (Optional)</label>
-                        {!signaturePreview ? (
-                            <label className="cert-settings-upload-drop">
-                                <input
-                                    type="file"
-                                    ref={signatureInputRef}
-                                    accept="image/png,image/jpeg"
-                                    onChange={handleSignatureChange}
-                                />
-                                <FaSignature className="cert-settings-upload-icon" />
-                                <p>Click to upload signature</p>
-                                <small>PNG, JPG — max 2MB</small>
-                            </label>
+                        <label>
+                            Signature Image
+                            {!useCustomSignature && (
+                                <span className="cert-settings-default-badge">
+                                    Using Default
+                                </span>
+                            )}
+                        </label>
+
+                        {!signaturePreview || !useCustomSignature ? (
+                            <>
+                                {/* Show default preview */}
+                                <div className="cert-settings-preview-box small">
+                                    <img src={singh} alt="Default Signature" />
+                                </div>
+                                <label className="cert-settings-upload-drop compact">
+                                    <input
+                                        type="file"
+                                        ref={signatureInputRef}
+                                        accept="image/png,image/jpeg"
+                                        onChange={handleSignatureChange}
+                                    />
+                                    <FaSignature className="cert-settings-upload-icon" />
+                                    <p>Click to upload custom signature</p>
+                                    <small>PNG, JPG — max 2MB</small>
+                                </label>
+                            </>
                         ) : (
                             <div className="cert-settings-preview-box small">
                                 <img src={signaturePreview} alt="Signature" />
@@ -436,10 +512,21 @@ const CertificateSettings = () => {
                                     type="button"
                                     className="cert-settings-remove"
                                     onClick={removeSignature}
+                                    title="Revert to default signature"
                                 >
-                                    <FaTimes />
+                                    <FaUndo />
                                 </button>
                             </div>
+                        )}
+
+                        {useCustomSignature && (
+                            <button
+                                type="button"
+                                className="cert-settings-revert-btn"
+                                onClick={removeSignature}
+                            >
+                                <FaUndo /> Revert to default signature
+                            </button>
                         )}
                     </div>
                 </div>

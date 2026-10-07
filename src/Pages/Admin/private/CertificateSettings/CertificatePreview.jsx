@@ -4,7 +4,7 @@ import { FaArrowLeft, FaUser, FaSpinner } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import agentApi from '../../../../api/agentApi';
 import { getFileUrl } from '../../../../api/config';
-import bgimg from '../../../../assets/imgs/image.png';
+import bgimg from '../../../../assets/imgs/logosing/image.png';
 import './CertificatePreview.css';
 
 const CertificatePreview = () => {
@@ -14,7 +14,7 @@ const CertificatePreview = () => {
     const [error, setError] = useState('');
 
     const sampleAgent = {
-        name: 'John Anderson',
+        name: 'Abdullah Nadeem',
         jobTitle: 'Senior Education Consultant',
         company: 'Global Edu Services',
         email: 'john@example.com',

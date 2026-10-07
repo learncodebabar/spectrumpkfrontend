@@ -185,7 +185,49 @@ const agentApi = {
             throw error;
         }
     },
+    // =============================================
+    // ⭐ FORGOT PASSWORD — OTP-based 3-step flow
+    // =============================================
 
+    // ⭐ Step 1: Send OTP
+    forgotPassword: async (data) => {
+        try {
+            console.log("📧 API - AGENT FORGOT PASSWORD");
+            const response = await api.post('/agent/forgot-password', data);
+            return response.data;
+        } catch (error) {
+            console.error("❌ Forgot Password Error:", error.response?.data);
+            throw error;
+        }
+    },
+
+    // ⭐ Step 2: Verify OTP
+    verifyResetOTP: async (data) => {
+        try {
+            console.log("🔐 API - AGENT VERIFY RESET OTP");
+            const requestData = {
+                email: data.email,
+                otp: String(data.otp).trim()
+            };
+            const response = await api.post('/agent/verify-reset-otp', requestData);
+            return response.data;
+        } catch (error) {
+            console.error("❌ Verify Reset OTP Error:", error.response?.data);
+            throw error;
+        }
+    },
+
+    // ⭐ Step 3: Reset Password
+    resetPassword: async (data) => {
+        try {
+            console.log("🔐 API - AGENT RESET PASSWORD");
+            const response = await api.post('/agent/reset-password', data);
+            return response.data;
+        } catch (error) {
+            console.error("❌ Reset Password Error:", error.response?.data);
+            throw error;
+        }
+    },
     getApplicationById: async (id) => {
         try {
             const token = localStorage.getItem('agentToken');
@@ -224,7 +266,18 @@ const agentApi = {
             throw error;
         }
     },
-
+changePassword: async (id, data, token) => {
+    try {
+        console.log("🔐 API - AGENT CHANGE PASSWORD");
+        const response = await api.put(`/agent/${id}/change-password`, data, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('❌ Change Password Error:', error.response?.data);
+        throw error;
+    }
+},
     getApplicationStats: async () => {
         try {
             const token = localStorage.getItem('agentToken');
@@ -250,6 +303,8 @@ const agentApi = {
             });
             return response.data;
         },
+        // ⭐ Public Contact Settings (for whatsapp button)
+
         getStats: async () => {
             const token = localStorage.getItem('agentToken');
             const response = await api.get('/agent/payments/stats', {
@@ -276,7 +331,15 @@ const agentApi = {
     // =============================================
     // DASHBOARD
     // =============================================
-
+getPublicContactSettings: async () => {
+    try {
+        const response = await api.get('/contact-settings/public');
+        return response.data;
+    } catch (error) {
+        console.error('❌ Get Public Contact Settings Error:', error.response?.data);
+        throw error;
+    }
+},
     getDashboardStats: async () => {
         try {
             console.log("📊 API - AGENT DASHBOARD STATS");

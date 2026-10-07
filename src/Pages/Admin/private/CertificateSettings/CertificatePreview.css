@@ -10,7 +10,6 @@
    ============================================ */
 .cert-preview-page {
     min-height: 100vh;
-    background: #e5e7eb;
     padding: 25px 20px 60px;
     font-family: 'EB Garamond', Georgia, serif;
 }
@@ -253,10 +252,11 @@
 }
 
 .agent-cert-signature-img {
-    max-height: 90px;
+    max-height:300px !important;
     max-width: 160px;
-    object-fit: contain;
-    margin-bottom: 4px;
+    margin-bottom: -24px;
+
+
 }
 
 .agent-cert-signature-placeholder {

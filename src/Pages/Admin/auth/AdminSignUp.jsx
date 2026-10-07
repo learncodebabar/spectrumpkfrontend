@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminSignUp.css';
 import adminApi from '../../../api/adminApi';
+import logo from "../../../assets/imgs/logosing/2.png"
+
 import { 
     FaUser, 
     FaEnvelope, 
@@ -300,9 +302,10 @@ const AdminSignUp = () => {
             <div className="admin-signup-card">
                 {/* ===== LOGO ===== */}
                 <div className="admin-signup-logo-container">
-                    <div className="admin-signup-logo-icon">
+                    {/* <div className="admin-signup-logo-icon">
                         <FaBuilding size={36} color="#ffffff" />
-                    </div>
+                    </div> */}
+                    <img className='main-logo-pages' src={logo} alt="" />
                     <h1 className="admin-signup-company-name">Admin Portal</h1>
                     <p className="admin-signup-company-tagline">
                         {showOTP ? 'Verify your email' : 'Create your admin account'}

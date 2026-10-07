@@ -1,6 +1,7 @@
 // src/Pages/Agent/private/AgentSignIn.jsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import logo from "../../../assets/imgs/logosing/2.png"
 import { 
     FaEnvelope, 
     FaLock, 
@@ -141,10 +142,11 @@ const AgentSignIn = () => {
             <div className="agent-signin-card">
                 {/* ===== HEADER ===== */}
                 <div className="agent-signin-header">
-                    <div className="agent-signin-header-icon">
+                    {/* <div className="agent-signin-header-icon">
                         <FaBuilding size={32} color="#ffffff" />
-                    </div>
-                    <h1>Agent Login</h1>
+                    </div> */}
+                    <img className='main-logo-pages' src={logo} alt="" />
+                    <h1> SpecTrum PK Agent Login</h1>
                     <p>Sign in to your agent account</p>
                 </div>
 

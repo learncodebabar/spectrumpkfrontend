@@ -65,20 +65,46 @@ const adminApi = {
         }
     },
 
+    // =============================================
+    // FORGOT PASSWORD — OTP-based 3-step flow
+    // =============================================
+
     forgotPassword: async (data) => {
         try {
+            console.log("📧 API - FORGOT PASSWORD (Send OTP)");
             const response = await api.post('/admin/forgot-password', data);
+            console.log("📥 Response:", response.data);
             return response.data;
         } catch (error) {
+            console.error("❌ Forgot Password Error:", error.response?.data);
             throw error;
         }
     },
 
-    resetPassword: async (token, data) => {
+    verifyResetOTP: async (data) => {
         try {
-            const response = await api.post(`/admin/reset-password/${token}`, data);
+            console.log("🔐 API - VERIFY RESET OTP");
+            const requestData = {
+                email: data.email,
+                otp: String(data.otp).trim()
+            };
+            const response = await api.post('/admin/verify-reset-otp', requestData);
+            console.log("📥 Response:", response.data);
             return response.data;
         } catch (error) {
+            console.error("❌ Verify Reset OTP Error:", error.response?.data);
+            throw error;
+        }
+    },
+
+    resetPassword: async (data) => {
+        try {
+            console.log("🔐 API - RESET PASSWORD");
+            const response = await api.post('/admin/reset-password', data);
+            console.log("📥 Response:", response.data);
+            return response.data;
+        } catch (error) {
+            console.error("❌ Reset Password Error:", error.response?.data);
             throw error;
         }
     },
@@ -247,7 +273,7 @@ const adminApi = {
     },
 
     // =============================================
-    // ⭐ CERTIFICATE SETTINGS APIs
+    // CERTIFICATE SETTINGS APIs
     // =============================================
 
     getCertificateSettings: async () => {
@@ -284,7 +310,7 @@ const adminApi = {
     },
 
     // =============================================
-    // ⭐ RENEWAL REQUESTS APIs
+    // RENEWAL REQUESTS APIs
     // =============================================
 
     getRenewalRequests: async (status = 'pending') => {
@@ -722,15 +748,120 @@ const adminApi = {
     },
 
     // =============================================
+    // ⭐ SUB-USER MANAGEMENT APIs
+    // =============================================
+
+    createSubUser: async (data) => {
+        const token = localStorage.getItem('adminToken');
+        const response = await api.post('/admin/sub-users', data, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        return response.data;
+    },
+
+    getAllSubUsers: async () => {
+        const token = localStorage.getItem('adminToken');
+        const response = await api.get('/admin/sub-users', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        return response.data;
+    },
+
+    getSubUserById: async (id) => {
+        const token = localStorage.getItem('adminToken');
+        const response = await api.get(`/admin/sub-users/${id}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        return response.data;
+    },
+    // =============================================
+// ⭐ CONTACT SETTINGS APIs
+// =============================================
+
+getContactSettings: async () => {
+    try {
+        const token = localStorage.getItem('adminToken');
+        const response = await api.get('/admin/contact-settings', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('❌ Get Contact Settings Error:', error.response?.data);
+        throw error;
+    }
+},
+
+updateContactSettings: async (data) => {
+    try {
+        const token = localStorage.getItem('adminToken');
+        const response = await api.put('/admin/contact-settings', data, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('❌ Update Contact Settings Error:', error.response?.data);
+        throw error;
+    }
+},
+
+    updateSubUser: async (id, data) => {
+        const token = localStorage.getItem('adminToken');
+        const response = await api.put(`/admin/sub-users/${id}`, data, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        return response.data;
+    },
+
+    deleteSubUser: async (id) => {
+        const token = localStorage.getItem('adminToken');
+        const response = await api.delete(`/admin/sub-users/${id}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        return response.data;
+    },
+
+    getAvailablePages: async () => {
+        const token = localStorage.getItem('adminToken');
+        const response = await api.get('/admin/available-pages', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        return response.data;
+    },
+
+    // =============================================
+    // ⭐ SUB-USER LOGIN (public — no token)
+    // =============================================
+
+    subUserLogin: async (credentials) => {
+        try {
+            console.log("🔐 API - SUB-USER LOGIN");
+            const response = await api.post('/admin/sub-users/login', credentials);
+            return response.data;
+        } catch (error) {
+            console.error("❌ Sub-User Login Error:", error.response?.data);
+            throw error;
+        }
+    },
+
+    // =============================================
     // UTILITY FUNCTIONS
     // =============================================
 
     logout: () => {
+        const role = localStorage.getItem('adminRole');
+
         localStorage.removeItem('adminToken');
         localStorage.removeItem('adminData');
         localStorage.removeItem('adminRole');
         localStorage.removeItem('userData');
-        window.location.href = '/signin';
+        localStorage.removeItem('adminProfileImage');
+
+        // ⭐ Redirect based on role
+        if (role === 'sub_admin') {
+            window.location.href = '/sub-user/signin';
+        } else {
+            window.location.href = '/signin';
+        }
     },
 
     isAuthenticated: () => {
@@ -742,7 +873,7 @@ const adminApi = {
     },
 
     getUserRole: () => {
-        return localStorage.getItem('adminRole');
+        return localStorage.getItem('adminRole') || 'admin';
     },
 
     getUserData: () => {
@@ -751,6 +882,33 @@ const adminApi = {
             return data ? JSON.parse(data) : null;
         } catch {
             return null;
+        }
+    },
+
+    // ⭐ Check if current user is sub-user
+    isSubUser: () => {
+        return localStorage.getItem('adminRole') === 'sub_admin';
+    },
+
+    // ⭐ Check if current user is super admin
+    isSuperAdmin: () => {
+        const role = localStorage.getItem('adminRole');
+        return !role || role === 'super_admin' || role === 'admin';
+    },
+
+    // ⭐ Check specific permission (for page/module access)
+    hasPermission: (pageKey) => {
+        const role = localStorage.getItem('adminRole');
+
+        // Super admin: sab access
+        if (!role || role === 'super_admin' || role === 'admin') return true;
+
+        // Sub admin: check permissions array
+        try {
+            const data = JSON.parse(localStorage.getItem('adminData') || '{}');
+            return (data.permissions || []).includes(pageKey);
+        } catch {
+            return false;
         }
     },
 
@@ -765,6 +923,7 @@ const adminApi = {
         localStorage.removeItem('adminData');
         localStorage.removeItem('adminRole');
         localStorage.removeItem('userData');
+        localStorage.removeItem('adminProfileImage');
     }
 };
 

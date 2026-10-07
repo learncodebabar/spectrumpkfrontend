@@ -234,7 +234,7 @@ const AgentPayments = () => {
                 </table>
 
                 <div class="footer">
-                    <p>© ${new Date().getFullYear()} SpecTrum PK Portal - Agent Payment Report</p>
+                    <p>© ${new Date().getFullYear()} Scholarship Portal - Agent Payment Report</p>
                 </div>
 
                 <script>

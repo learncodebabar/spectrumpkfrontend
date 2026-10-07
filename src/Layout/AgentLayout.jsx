@@ -3,46 +3,142 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import AgentSidebar from '../Components/Agent/Sidebar/AgentSidebar';
 import AgentNavbar from '../Components/Agent/Navbar/AgentNavbar';
-import { FaBars } from 'react-icons/fa';
+import agentApi from '../api/agentApi';
+import { FaBars, FaWhatsapp, FaTimes } from 'react-icons/fa';
 import './AgentLayout.css';
 
+// ============================================
+// ⭐ WHATSAPP BUTTON (inline, safe z-index)
+// ============================================
+const WhatsAppButton = () => {
+    const [contactNumber, setContactNumber] = useState('');
+    const [message, setMessage] = useState('Hello! I need assistance from Spectrum PK.');
+    const [email, setEmail] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+
+    useEffect(() => {
+        fetchSettings();
+    }, []);
+
+    const fetchSettings = async () => {
+        try {
+            const res = await agentApi.getPublicContactSettings();
+            if (res.success && res.settings) {
+                setContactNumber(res.settings.whatsappNumber || '');
+                setMessage(res.settings.whatsappMessage || 'Hello! I need assistance from Spectrum PK.');
+                setEmail(res.settings.email || '');
+            }
+        } catch (err) {
+            console.error('WhatsAppButton error:', err);
+        }
+    };
+
+    if (!contactNumber) return null;
+
+    const handleWhatsAppClick = () => {
+        let cleanNumber = String(contactNumber).replace(/[^0-9]/g, '');
+        if (cleanNumber.startsWith('0')) {
+            cleanNumber = '92' + cleanNumber.slice(1);
+        }
+        const encodedMsg = encodeURIComponent(message);
+        window.open(`https://wa.me/${cleanNumber}?text=${encodedMsg}`, '_blank', 'noopener,noreferrer');
+        setShowPopup(false);
+    };
+
+    const handleEmailClick = () => {
+        if (!email) return;
+        const subject = encodeURIComponent('Support Request — Spectrum PK');
+        window.location.href = `mailto:${email}?subject=${subject}`;
+        setShowPopup(false);
+    };
+
+    return (
+        <>
+            {showPopup && (
+                <div className="whatsapp-popup">
+                    <button
+                        className="whatsapp-popup-close"
+                        onClick={() => setShowPopup(false)}
+                    >
+                        <FaTimes />
+                    </button>
+
+                    <div className="whatsapp-popup-header">
+                        <div className="whatsapp-popup-avatar">
+                            <FaWhatsapp />
+                        </div>
+                        <div>
+                            <strong>Spectrum PK Support</strong>
+                            <span className="whatsapp-popup-status">● Online</span>
+                        </div>
+                    </div>
+
+                    <p className="whatsapp-popup-text">
+                        Hi there! 👋<br />
+                        Need help? Chat with us on WhatsApp.
+                    </p>
+
+                    <div className="whatsapp-popup-actions">
+                        <button
+                            className="whatsapp-popup-btn whatsapp"
+                            onClick={handleWhatsAppClick}
+                        >
+                            <FaWhatsapp /> Start Chat
+                        </button>
+
+                        {email && (
+                            <button
+                                className="whatsapp-popup-btn email"
+                                onClick={handleEmailClick}
+                            >
+                                ✉️ Send Email
+                            </button>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            <button
+                className="whatsapp-float-btn"
+                onClick={() => setShowPopup(!showPopup)}
+                title="Contact Support"
+            >
+                <FaWhatsapp />
+            </button>
+        </>
+    );
+};
+
+// ============================================
+// AGENT LAYOUT
+// ============================================
 const AgentLayout = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // ===== STATE =====
-    const [sidebarOpen, setSidebarOpen] = useState(true);              // desktop: full / icon-only
+    const [sidebarOpen, setSidebarOpen] = useState(true);
     const [isMobile, setIsMobile] = useState(false);
-    const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false); // mobile: hidden by default
+    const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
-    // ============================================
-    // CHECK AUTHENTICATION
-    // ============================================
+    // Auth check
     useEffect(() => {
         const token = localStorage.getItem('agentToken');
         const agentData = localStorage.getItem('agentData');
-
         if (!token || !agentData) {
-            console.log('❌ No agent token found, redirecting to login');
             navigate('/agent/login');
             return;
         }
-
         try {
             const agent = JSON.parse(agentData);
             if (agent.approvalStatus !== 'approved') {
-                console.log('❌ Agent not approved:', agent.approvalStatus);
                 navigate('/agent/status');
             }
-        } catch (error) {
-            console.error('Error parsing agent data:', error);
+        } catch {
             navigate('/agent/login');
         }
     }, [navigate]);
 
-    // ============================================
-    // HANDLE RESPONSIVE
-    // ============================================
+    // Responsive
     useEffect(() => {
         const handleResize = () => {
             const width = window.innerWidth;
@@ -50,12 +146,11 @@ const AgentLayout = () => {
             setIsMobile(mobile);
 
             if (mobile) {
-                // ✅ MOBILE: sidebar always starts fully hidden
                 setMobileSidebarOpen(false);
             } else if (width < 1024) {
-                setSidebarOpen(false); // tablet: icon-only
+                setSidebarOpen(false);
             } else {
-                setSidebarOpen(true);  // desktop: full
+                setSidebarOpen(true);
             }
         };
 
@@ -64,39 +159,21 @@ const AgentLayout = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // ============================================
-    // CLOSE MOBILE SIDEBAR ON ROUTE CHANGE
-    // ============================================
+    // Close mobile sidebar on route change
     useEffect(() => {
-        if (isMobile) {
-            setMobileSidebarOpen(false);
-        }
+        if (isMobile) setMobileSidebarOpen(false);
     }, [location.pathname, isMobile]);
 
-    // ============================================
-    // TOGGLE SIDEBAR
-    // ============================================
     const toggleSidebar = () => {
-        if (isMobile) {
-            setMobileSidebarOpen(prev => !prev); // mobile: full open <-> fully closed
-        } else {
-            setSidebarOpen(prev => !prev);       // desktop: full <-> icon-only
-        }
+        if (isMobile) setMobileSidebarOpen(prev => !prev);
+        else setSidebarOpen(prev => !prev);
     };
 
-    const closeMobileSidebar = () => {
-        setMobileSidebarOpen(false);
-    };
-
-    // ============================================
-    // EFFECTIVE OPEN STATE
-    // Mobile → true/false only (never icon-only)
-    // ============================================
+    const closeMobileSidebar = () => setMobileSidebarOpen(false);
     const effectiveOpen = isMobile ? mobileSidebarOpen : sidebarOpen;
 
     return (
         <div className="agent-layout">
-            {/* ===== MOBILE: SHOW SIDEBAR BUTTON (only when closed) ===== */}
             {isMobile && !mobileSidebarOpen && (
                 <button
                     className="agent-sidebar-show-btn"
@@ -108,16 +185,13 @@ const AgentLayout = () => {
                 </button>
             )}
 
-            {/* ===== MOBILE: LIGHT OVERLAY (no black) ===== */}
             {isMobile && mobileSidebarOpen && (
                 <div
                     className="agent-sidebar-overlay"
                     onClick={closeMobileSidebar}
-                    aria-hidden="true"
                 />
             )}
 
-            {/* ===== SIDEBAR CONTAINER ===== */}
             <aside
                 className={`agent-sidebar-container ${
                     isMobile
@@ -133,7 +207,6 @@ const AgentLayout = () => {
                 />
             </aside>
 
-            {/* ===== MAIN CONTENT ===== */}
             <div className={`agent-main-container ${
                 !isMobile && sidebarOpen ? 'agent-sidebar-open' : 'agent-sidebar-closed'
             }`}>
@@ -149,6 +222,9 @@ const AgentLayout = () => {
                     </div>
                 </main>
             </div>
+
+            {/* WhatsApp Button — fixed, out of layout flow */}
+            <WhatsAppButton />
         </div>
     );
 };

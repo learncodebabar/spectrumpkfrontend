@@ -12,7 +12,9 @@ import {
     FaTimes,
     FaUserTie,
     FaPlusCircle,
-    FaCertificate          // ⭐ NEW — certificate icon
+    FaCertificate,
+    FaUserCircle,
+    FaHeadset              // ⭐ NEW — Contact Us icon
 } from 'react-icons/fa';
 import './AgentSidebar.css';
 
@@ -67,11 +69,25 @@ const AgentSidebar = ({ isOpen, onClose, isMobile }) => {
                 { title: 'My Payments', path: '/agent/payments', exact: true }
             ]
         },
-        // ⭐ NEW — Certificate menu item
+        // ⭐ Certificate
         {
             title: 'Certificate',
             icon: <FaCertificate />,
             path: '/agent/certificate',
+            exact: true
+        },
+        // ⭐ PROFILE
+        {
+            title: 'Profile',
+            icon: <FaUserCircle />,
+            path: '/agent/profile',
+            exact: true
+        },
+        // ⭐ CONTACT US — NEW
+        {
+            title: 'Contact Us',
+            icon: <FaHeadset />,
+            path: '/agent/contact-us',
             exact: true
         }
     ];
@@ -89,6 +105,7 @@ const AgentSidebar = ({ isOpen, onClose, isMobile }) => {
         if (window.confirm('Are you sure you want to logout?')) {
             localStorage.removeItem('agentToken');
             localStorage.removeItem('agentData');
+            localStorage.removeItem('agentProfileImage');
             navigate('/agent/login');
         }
     };
@@ -111,7 +128,7 @@ const AgentSidebar = ({ isOpen, onClose, isMobile }) => {
                     </div>
                 </div>
 
-                {/* ===== MOBILE: CLOSE (X) BUTTON ===== */}
+                {/* MOBILE CLOSE BUTTON */}
                 {isMobile && (
                     <button
                         className="agent_sidebar_close_btn"

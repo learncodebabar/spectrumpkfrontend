@@ -1,0 +1,348 @@
+/* src/Pages/Agent/private/ContactUs/ContactUs.css */
+
+.contact-us-page {
+    min-height: 100vh;
+    background: #f8fafc;
+    padding: 30px 25px 60px;
+    font-family: 'Poppins', -apple-system, sans-serif;
+}
+
+.contact-us-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 60vh;
+    color: #2563eb;
+    font-size: 1.05rem;
+}
+
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================
+   EMPTY
+   ============================================ */
+.contact-us-empty {
+    max-width: 480px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 50px 30px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+}
+.contact-us-empty svg {
+    font-size: 4rem;
+    color: #cbd5e1;
+    margin-bottom: 18px;
+}
+.contact-us-empty h2 {
+    font-size: 1.4rem;
+    color: #0f172a;
+    margin: 0 0 10px;
+    font-weight: 800;
+}
+.contact-us-empty p {
+    color: #64748b;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.contact-us-header {
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.contact-us-header-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.3);
+    flex-shrink: 0;
+    animation: contactFloat 4s ease-in-out infinite;
+}
+@keyframes contactFloat {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+.contact-us-header h1 {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 4px;
+    letter-spacing: -0.5px;
+}
+.contact-us-header p {
+    color: #64748b;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   GRID
+   ============================================ */
+.contact-us-grid {
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+
+/* ============================================
+   CARD
+   ============================================ */
+.contact-us-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-us-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+}
+
+.contact-us-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(15, 23, 42, 0.1);
+}
+
+/* Card colors */
+.contact-us-whatsapp::before { background: linear-gradient(180deg, #25d366, #128c7e); }
+.contact-us-whatsapp .contact-us-card-icon {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: #fff;
+}
+.contact-us-whatsapp:hover { border-color: rgba(37, 211, 102, 0.3); }
+.contact-us-whatsapp .contact-us-btn.primary {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.3);
+}
+.contact-us-whatsapp .contact-us-btn.primary:hover {
+    box-shadow: 0 10px 24px rgba(37, 211, 102, 0.45);
+}
+
+.contact-us-email::before { background: linear-gradient(180deg, #2563eb, #1d4ed8); }
+.contact-us-email .contact-us-card-icon {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+}
+.contact-us-email:hover { border-color: rgba(37, 99, 235, 0.3); }
+.contact-us-email .contact-us-btn.primary {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+.contact-us-email .contact-us-btn.primary:hover {
+    box-shadow: 0 10px 24px rgba(37, 99, 235, 0.45);
+}
+
+.contact-us-phone::before { background: linear-gradient(180deg, #f59e0b, #d97706); }
+.contact-us-phone .contact-us-card-icon {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+}
+.contact-us-phone:hover { border-color: rgba(217, 119, 6, 0.3); }
+.contact-us-phone .contact-us-btn.primary {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    box-shadow: 0 6px 16px rgba(217, 119, 6, 0.3);
+}
+.contact-us-phone .contact-us-btn.primary:hover {
+    box-shadow: 0 10px 24px rgba(217, 119, 6, 0.45);
+}
+
+.contact-us-address::before { background: linear-gradient(180deg, #7c3aed, #6d28d9); }
+.contact-us-address .contact-us-card-icon {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    color: #fff;
+}
+.contact-us-address:hover { border-color: rgba(124, 58, 237, 0.3); }
+.contact-us-address .contact-us-btn.primary {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.3);
+}
+.contact-us-address .contact-us-btn.primary:hover {
+    box-shadow: 0 10px 24px rgba(124, 58, 237, 0.45);
+}
+
+/* Card Icon */
+.contact-us-card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+/* Card Body */
+.contact-us-card-body {
+    flex: 1;
+}
+.contact-us-card-body h3 {
+    font-size: 1.15rem;
+    color: #0f172a;
+    margin: 0 0 6px;
+    font-weight: 800;
+}
+.contact-us-value {
+    font-size: 1rem;
+    color: #2563eb;
+    margin: 0 0 6px;
+    font-weight: 600;
+    word-break: break-all;
+}
+.contact-us-value.small {
+    font-size: 0.92rem;
+    color: #475569;
+    line-height: 1.5;
+}
+.contact-us-desc {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Card Actions */
+.contact-us-card-actions {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.contact-us-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+}
+
+.contact-us-btn.primary {
+    flex: 1;
+    color: #fff;
+}
+.contact-us-btn.primary:hover {
+    transform: translateY(-2px);
+}
+
+.contact-us-btn.ghost {
+    width: 46px;
+    padding: 12px;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1.5px solid #e2e8f0;
+    flex-shrink: 0;
+}
+.contact-us-btn.ghost:hover {
+    background: #e2e8f0;
+    color: #2563eb;
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   FOOTER — SUPPORT HOURS
+   ============================================ */
+.contact-us-footer-card {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #eff6ff, #eef2ff);
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    border-radius: 18px;
+    padding: 24px 28px;
+}
+
+.contact-us-footer-icon {
+    font-size: 2.2rem;
+    color: #2563eb;
+    flex-shrink: 0;
+}
+
+.contact-us-footer-card h4 {
+    font-size: 1rem;
+    color: #0f172a;
+    margin: 0 0 6px;
+    font-weight: 800;
+}
+.contact-us-footer-card p {
+    font-size: 0.88rem;
+    color: #475569;
+    margin: 2px 0;
+    line-height: 1.5;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+    .contact-us-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .contact-us-page { padding: 20px 14px 40px; }
+
+    .contact-us-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+    .contact-us-header h1 { font-size: 1.5rem; }
+    .contact-us-header-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+    }
+
+    .contact-us-card { padding: 22px; }
+    .contact-us-footer-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 20px;
+    }
+}

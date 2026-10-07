@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AgentSignUp.css';
+import pdfmain from "../../../assets/PDF/SpecTrumPK.pdf"
 import agentApi from '../../../api/agentApi';
 import { 
     FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash,
@@ -9,13 +10,16 @@ import {
     FaClock, FaEnvelopeOpen, FaCheckCircle, FaIdCard,
     FaCalendarAlt, FaBriefcase, FaMapMarkerAlt,
     FaGraduationCap, FaPhone, FaUpload, FaTrash, FaFileAlt,
-    FaTimes, FaUserTie, FaLink, FaFilePdf, FaSignature
+    FaTimes, FaUserTie, FaLink, FaFilePdf, FaSignature,
+    FaDownload
 } from 'react-icons/fa';
 
 // ============================================
-// DEMO PDF LINK — Testing ke liye
+// TERMS PDF — imported from assets
 // ============================================
-const DEMO_TERMS_PDF_URL = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+const TERMS_PDF_URL = pdfmain;
+
+// ... बाकी पूरा code वैसा ही रहेगा
 
 // ============================================
 // FLOATING CIRCLES BACKGROUND
@@ -68,17 +72,17 @@ const AgentSignUp = () => {
         idType: 'aadhar', idNumber: '', idFile: null, idFilePreview: null,
         idFileUrl: '',
         jobTitle: '', company: '', experience: '', education: '', specialization: '',
-        address: '', city: '', state: '', pincode: '', country: 'India', bio: '',
+        address: '', city: '', state: '', pincode: '', country: 'Pakistan', bio: '',
         languages: [], skills: [], 
         agreeTerms: false,
         hasReadTerms: false,
         signature: null,
         signaturePreview: null,
-        signatureUrl: '',              // ⭐ URL کے لیے
+        signatureUrl: '',
     });
 
     const [idFileMode, setIdFileMode] = useState('upload');
-    const [signatureMode, setSignatureMode] = useState('upload');   // ⭐ نیا
+    const [signatureMode, setSignatureMode] = useState('upload');
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(false);
     const [serverError, setServerError] = useState('');
@@ -179,7 +183,7 @@ const AgentSignUp = () => {
             ...prev,
             signature: file,
             signaturePreview: URL.createObjectURL(file),
-            signatureUrl: ''           // URL clear
+            signatureUrl: ''
         }));
         showToast('Signature uploaded successfully!', 'success');
     };
@@ -189,9 +193,6 @@ const AgentSignUp = () => {
         if (signatureInputRef.current) signatureInputRef.current.value = '';
     };
 
-    // ============================================
-    // SIGNATURE URL CHANGE
-    // ============================================
     const handleSignatureUrlChange = (value) => {
         setFormData(prev => ({
             ...prev,
@@ -202,9 +203,6 @@ const AgentSignUp = () => {
         if (signatureInputRef.current) signatureInputRef.current.value = '';
     };
 
-    // ============================================
-    // SIGNATURE MODE SWITCH (upload | url)
-    // ============================================
     const handleSignatureModeSwitch = (mode) => {
         setSignatureMode(mode);
         if (mode === 'upload') {
@@ -360,7 +358,6 @@ const AgentSignUp = () => {
                 fd.append('idFileUrl', formData.idFileUrl.trim());
             }
 
-            // ⭐ Signature — Upload OR URL
             if (formData.signature) {
                 fd.append('signature', formData.signature);
             }
@@ -455,6 +452,22 @@ const AgentSignUp = () => {
         setIsSubmitting(false);
         setLoading(false);
         hideToast();
+    };
+
+    // ============================================
+    // TERMS PDF HANDLERS
+    // ============================================
+    const openTermsPdf = () => {
+        window.open(TERMS_PDF_URL, '_blank', 'noopener,noreferrer');
+    };
+
+    const downloadTermsPdf = () => {
+        const link = document.createElement('a');
+        link.href = TERMS_PDF_URL;
+        link.download = 'SpecTrumPK.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
 
     return (
@@ -858,7 +871,7 @@ const AgentSignUp = () => {
                                     </div>
                                 </div>
 
-                                {/* ⭐ SIGNATURE — Upload OR URL */}
+                                {/* SIGNATURE — Upload OR URL */}
                                 <div className="agent-signup-form-section">
                                     <h3 className="agent-signup-section-title">
                                         <FaSignature className="agent-signup-section-icon" /> Signature (Optional)
@@ -866,7 +879,6 @@ const AgentSignUp = () => {
                                     <div className="agent-signup-form-group">
                                         <label>Your Signature (Optional)</label>
 
-                                        {/* Mode Toggle */}
                                         <div className="agent-signup-file-mode-toggle">
                                             <button
                                                 type="button"
@@ -886,7 +898,6 @@ const AgentSignUp = () => {
                                             </button>
                                         </div>
 
-                                        {/* UPLOAD MODE */}
                                         {signatureMode === 'upload' && (
                                             <div className="agent-signup-file-upload">
                                                 {!formData.signaturePreview ? (
@@ -924,7 +935,6 @@ const AgentSignUp = () => {
                                             </div>
                                         )}
 
-                                        {/* URL MODE */}
                                         {signatureMode === 'url' && (
                                             <div className="agent-signup-url-input-wrap">
                                                 <FaLink className="agent-signup-url-icon" />
@@ -954,20 +964,23 @@ const AgentSignUp = () => {
                                 {/* TERMS & CONDITIONS */}
                                 <div className="agent-signup-form-group agent-signup-terms-group">
                                     
-                                    {/* PDF DOWNLOAD LINK */}
+                                    {/* PDF BUTTONS */}
                                     <div className="agent-signup-terms-pdf">
-                                        <a 
-                                            href={DEMO_TERMS_PDF_URL}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            download="Terms-and-Conditions.pdf"
+                                        <button
+                                            type="button"
                                             className="agent-signup-pdf-link"
+                                            onClick={openTermsPdf}
                                         >
-                                            <FaFilePdf /> Download Terms & Conditions (PDF)
-                                        </a>
-                                        <small className="agent-signup-demo-note">
-                                            (This is for demo)
-                                        </small>
+                                            <FaFilePdf /> View Terms & Conditions
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            className="agent-signup-pdf-link agent-signup-pdf-download"
+                                            onClick={downloadTermsPdf}
+                                        >
+                                            <FaDownload /> Download PDF
+                                        </button>
                                     </div>
 
                                     {/* Agree Terms */}
@@ -981,7 +994,23 @@ const AgentSignUp = () => {
                                             disabled={loading} 
                                         />
                                         <span>
-                                            I agree to the <a href="/terms">Terms and Conditions</a> and <a href="/privacy">Privacy Policy</a> *
+                                            I agree to the{' '}
+                                            <button
+                                                type="button"
+                                                className="agent-signup-inline-link"
+                                                onClick={openTermsPdf}
+                                            >
+                                                Terms and Conditions
+                                            </button>
+                                            {' '}and{' '}
+                                            <button
+                                                type="button"
+                                                className="agent-signup-inline-link"
+                                                onClick={openTermsPdf}
+                                            >
+                                                Privacy Policy
+                                            </button>
+                                            {' '}*
                                         </span>
                                     </label>
                                     {errors.agreeTerms && <span className="agent-signup-error-text">{errors.agreeTerms}</span>}

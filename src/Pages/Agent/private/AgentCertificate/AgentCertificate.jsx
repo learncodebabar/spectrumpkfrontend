@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa';
 import agentApi from '../../../../api/agentApi';
 import { getFileUrl } from '../../../../api/config';
-import bgimg from '../../../../assets/imgs/image.png';
+import bgimg from '../../../../assets/imgs/logosing/image.png';
 import './AgentCertificate.css';
 
 const AgentCertificate = () => {
@@ -238,7 +238,6 @@ const AgentCertificate = () => {
         day: 'numeric', month: 'long', year: 'numeric'
     });
 
-    // ⭐ Countdown text builder
     const getCountdownText = () => {
         if (isExpired) {
             return `⚠️ Certificate expired on ${fmt(validTo)}`;
@@ -293,7 +292,7 @@ const AgentCertificate = () => {
             </div>
 
             {/* ============================================
-                ⭐ CERTIFICATE BODY — only if NOT expired + no pending
+                ⭐ CERTIFICATE BODY
                 ============================================ */}
             {(!isExpired || renewalStatus === 'pending') && (
                 <div className="agent-cert-wrapper">
@@ -335,9 +334,15 @@ const AgentCertificate = () => {
 
                             {/* FOOTER */}
                             <div className="agent-cert-footer">
+
+                                {/* ⭐⭐⭐ ADMIN SIGNATURE — BADA ⭐⭐⭐ */}
                                 <div className="agent-cert-footer-item">
                                     {adminSigSrc ? (
-                                        <img src={adminSigSrc} alt="Authorized" className="agent-cert-signature-img" />
+                                        <img
+                                            src={adminSigSrc}
+                                            alt="Authorized"
+                                            className="agent-cert-signature-img agent-cert-signature-admin"
+                                        />
                                     ) : (
                                         <div className="agent-cert-signature-placeholder">{signatoryName}</div>
                                     )}
@@ -345,6 +350,7 @@ const AgentCertificate = () => {
                                     <span className="agent-cert-footer-label">Authorized Signature</span>
                                 </div>
 
+                                {/* SEAL */}
                                 <div className="agent-cert-seal-wrapper">
                                     <div
                                         className="agent-cert-seal"
@@ -361,9 +367,14 @@ const AgentCertificate = () => {
                                     </div>
                                 </div>
 
+                                {/* ⭐ AGENT SIGNATURE — normal size */}
                                 <div className="agent-cert-footer-item">
                                     {agentSigSrc ? (
-                                        <img src={agentSigSrc} alt="Agent" className="agent-cert-signature-img" />
+                                        <img
+                                            src={agentSigSrc}
+                                            alt="Agent"
+                                            className="agent-cert-signature-img"
+                                        />
                                     ) : (
                                         <div className="agent-cert-signature-placeholder">{agent.name}</div>
                                     )}
@@ -383,7 +394,7 @@ const AgentCertificate = () => {
             )}
 
             {/* ============================================
-                ⭐ EXPIRED — Show renewal CTA instead of certificate
+                ⭐ EXPIRED CARD
                 ============================================ */}
             {isExpired && renewalStatus !== 'pending' && (
                 <div className="agent-cert-expired-card">
@@ -410,7 +421,7 @@ const AgentCertificate = () => {
             )}
 
             {/* ============================================
-                ⭐ BELOW CERTIFICATE — Countdown / Renewal CTA bar
+                ⭐ COUNTDOWN BAR
                 ============================================ */}
             <div className={`agent-cert-countdown-bar ${countdownClass}`}>
                 {renewalStatus === 'pending' ? (

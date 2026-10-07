@@ -138,7 +138,7 @@ const MyApplications = () => {
             'pending-documents': { class: 'status-pending', label: 'Pending Docs', icon: <FaExclamationTriangle /> },
             'approved': { class: 'status-approved', label: 'Approved', icon: <FaCheckCircle /> },
             'rejected': { class: 'status-rejected', label: 'Rejected', icon: <FaTimesCircle /> },
-            'SpecTrum PK-disbursed': { class: 'status-disbursed', label: 'Disbursed', icon: <FaCheckCircle /> }
+            'scholarship-disbursed': { class: 'status-disbursed', label: 'Disbursed', icon: <FaCheckCircle /> }
         };
         const config = statusMap[status] || statusMap['submitted'];
         return (
@@ -156,7 +156,7 @@ const MyApplications = () => {
     };
 
     const canEdit = (status) => {
-        return !['approved', 'SpecTrum PK-disbursed'].includes(status);
+        return !['approved', 'scholarship-disbursed'].includes(status);
     };
 
     // ============================================
@@ -174,7 +174,7 @@ const MyApplications = () => {
                         </div>
                         <div>
                             <h1>My Applications</h1>
-                            <p>Manage all your student SpecTrum PK applications</p>
+                            <p>Manage all your student scholarship applications</p>
                         </div>
                     </div>
 
@@ -260,7 +260,7 @@ const MyApplications = () => {
                             <option value="pending-documents">Pending Documents</option>
                             <option value="approved">Approved</option>
                             <option value="rejected">Rejected</option>
-                            <option value="SpecTrum PK-disbursed">Disbursed</option>
+                            <option value="scholarship-disbursed">Disbursed</option>
                         </select>
                     </div>
                 </div>
@@ -284,7 +284,7 @@ const MyApplications = () => {
                         <p>
                             {searchTerm || statusFilter !== 'all'
                                 ? 'Try adjusting your filters'
-                                : 'Click "New Application" to submit your first SpecTrum PK application'}
+                                : 'Click "New Application" to submit your first scholarship application'}
                         </p>
                         {!searchTerm && statusFilter === 'all' && (
                             <button

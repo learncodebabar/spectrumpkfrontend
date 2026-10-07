@@ -1,39 +1,56 @@
 // src/Layout/AdminSidebar.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import logo from "../../../assets/imgs/logosing/Untitled design (9).png"
 import { 
-    FaTachometerAlt, 
-    FaUserTie, 
-    FaBuilding, 
-    FaSignOutAlt,
-    FaFileAlt,
-    FaChevronDown,
-    FaChevronRight,
-    FaTimes,
-    FaUniversity,
-    FaGraduationCap,
-    FaMoneyBillWave,
-    FaCertificate,
-    FaClock                    // ⭐ NEW — Renewals
+    FaTachometerAlt, FaUserTie, FaBuilding, FaSignOutAlt,
+    FaFileAlt, FaChevronDown, FaChevronRight, FaTimes,
+    FaUniversity, FaGraduationCap, FaMoneyBillWave,
+    FaCertificate, FaClock, FaUsers, FaUserCircle,
+    FaAddressBook              // ⭐ NEW — Contact icon
 } from 'react-icons/fa';
 import './AdminSidebar.css';
 
 const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
     const navigate = useNavigate();
     const [expandedMenus, setExpandedMenus] = useState({});
+    const [userRole, setUserRole] = useState('admin');
+    const [permissions, setPermissions] = useState([]);
+
+    // ⭐ Load role + permissions from localStorage
+    useEffect(() => {
+        try {
+            const role = localStorage.getItem('adminRole') || 'admin';
+            setUserRole(role);
+
+            const data = JSON.parse(localStorage.getItem('adminData') || '{}');
+            setPermissions(data.permissions || []);
+        } catch (e) {
+            console.error('Error parsing admin data:', e);
+        }
+    }, []);
+
+    // ⭐ Check if user has permission
+    const hasAccess = (pageKey) => {
+        // Super admin / admin = all access
+        if (userRole !== 'sub_admin') return true;
+        return permissions.includes(pageKey);
+    };
 
     // ===== MENU ITEMS =====
-    const menuItems = [
+    const allMenuItems = [
         {
             title: 'Dashboard',
             icon: <FaTachometerAlt />,
             path: '/admin/dashboard',
-            exact: true
+            exact: true,
+            key: 'dashboard'
         },
         {
             title: 'Agents',
             icon: <FaUserTie />,
             path: '/admin/agents',
+            key: 'agents',
             submenu: [
                 { title: 'All Agents', path: '/admin/agents', exact: true },
                 { title: 'Pending Approvals', path: '/admin/agents/pending' },
@@ -45,6 +62,7 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
             title: 'Applications',
             icon: <FaFileAlt />,
             path: '/admin/applications',
+            key: 'applications',
             submenu: [
                 { title: 'All Applications', path: '/admin/applications', exact: true }
             ]
@@ -53,6 +71,7 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
             title: 'Payments',
             icon: <FaMoneyBillWave />,
             path: '/admin/payments',
+            key: 'payments',
             submenu: [
                 { title: 'All Payments', path: '/admin/payments', exact: true },
                 { title: 'Receive Payment', path: '/admin/payments/receive' },
@@ -63,6 +82,7 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
             title: 'Universities',
             icon: <FaUniversity />,
             path: '/admin/universities',
+            key: 'universities',
             submenu: [
                 { title: 'All Universities', path: '/admin/universities', exact: true },
                 { title: 'Add University', path: '/admin/universities/add' }
@@ -72,6 +92,7 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
             title: 'Programs',
             icon: <FaGraduationCap />,
             path: '/admin/programs',
+            key: 'programs',
             submenu: [
                 { title: 'All Programs', path: '/admin/programs', exact: true },
                 { title: 'Add Program', path: '/admin/programs/add' }
@@ -81,19 +102,45 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
             title: 'Certificate',
             icon: <FaCertificate />,
             path: '/admin/certificate-settings',
+            key: 'certificate-settings',
             submenu: [
                 { title: 'Certificate Settings', path: '/admin/certificate-settings', exact: true },
                 { title: 'Preview Certificate', path: '/admin/certificate-preview' }
             ]
         },
-        // ⭐ RENEWALS
         {
             title: 'Renewals',
             icon: <FaClock />,
             path: '/admin/renewals',
-            exact: true
+            exact: true,
+            key: 'renewals'
+        },
+        {
+            title: 'Users',
+            icon: <FaUsers />,
+            path: '/admin/add-user',
+            exact: true,
+            key: 'users'
+        },
+        // ⭐ CONTACT SETTINGS — NEW
+        {
+            title: 'Contact',
+            icon: <FaAddressBook />,
+            path: '/admin/contact-settings',
+            exact: true,
+            key: 'contact-settings'
+        },
+        {
+            title: 'Profile',
+            icon: <FaUserCircle />,
+            path: '/admin/profile',
+            exact: true,
+            key: 'profile'
         }
     ];
+
+    // ⭐ Filter menus — sirf allowed pages
+    const menuItems = allMenuItems.filter(item => hasAccess(item.key));
 
     const toggleSubmenu = (title) => {
         setExpandedMenus(prev => ({ ...prev, [title]: !prev[title] }));
@@ -101,9 +148,18 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
 
     const handleLogout = () => {
         if (window.confirm('Are you sure you want to logout?')) {
+            const role = localStorage.getItem('adminRole');
+
             localStorage.removeItem('adminToken');
             localStorage.removeItem('adminData');
-            navigate('/signin');
+            localStorage.removeItem('adminRole');
+            localStorage.removeItem('adminProfileImage');
+
+            if (role === 'sub_admin') {
+                navigate('/sub-user/signin');
+            } else {
+                navigate('/signin');
+            }
         }
     };
 
@@ -112,14 +168,8 @@ const AdminSidebar = ({ isOpen, onClose, isMobile }) => {
             {/* HEADER */}
             <div className="admin-sidebar-header">
                 <div className="admin-sidebar-logo">
-                    <div className="admin-sidebar-logo-icon-wrapper">
-                        <FaBuilding className="admin-sidebar-logo-icon" />
-                    </div>
                     {isOpen && (
-                        <div className="admin-sidebar-title-wrapper">
-                            <span className="admin-sidebar-title">Admin</span>
-                            <span className="admin-sidebar-subtitle">Panel</span>
-                        </div>
+                        <img className='sidbar-logo-admin' src={logo} alt="Spectrum PK" />
                     )}
                 </div>
                 {isMobile && (

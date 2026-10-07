@@ -1,0 +1,411 @@
+/* src/Pages/Admin/private/ContactSettings/ContactSettings.css */
+
+.contact-settings-page {
+    min-height: 100vh;
+    background: #f8fafc;
+    padding: 30px 25px 60px;
+    font-family: 'Poppins', -apple-system, sans-serif;
+}
+
+.contact-settings-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 60vh;
+    color: #1e40af;
+    font-size: 1.1rem;
+}
+
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================
+   TOAST
+   ============================================ */
+.contact-settings-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    z-index: 9999;
+}
+.contact-settings-toast.success {
+    border-left: 4px solid #2563eb;
+    color: #1d4ed8;
+}
+.contact-settings-toast.error {
+    border-left: 4px solid #dc2626;
+    color: #b91c1c;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.contact-settings-header {
+    max-width: 1200px;
+    margin: 0 auto 24px;
+}
+.contact-settings-header h1 {
+    font-size: 1.7rem;
+    color: #0f172a;
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+}
+.contact-settings-header h1 svg {
+    color: #2563eb;
+}
+.contact-settings-header p {
+    color: #64748b;
+    margin: 0;
+    font-size: 0.92rem;
+}
+
+/* ============================================
+   LAYOUT — 2 columns
+   ============================================ */
+.contact-settings-layout {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+    align-items: start;
+}
+
+/* ============================================
+   FORM
+   ============================================ */
+.contact-settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-settings-section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 26px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+}
+
+.contact-settings-section h2 {
+    font-size: 1.05rem;
+    color: #0f172a;
+    margin: 0 0 8px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f1f5f9;
+}
+.contact-settings-section h2 svg {
+    color: #2563eb;
+}
+
+.contact-settings-hint {
+    font-size: 0.82rem;
+    color: #64748b;
+    margin: 0 0 16px;
+    line-height: 1.55;
+}
+
+.contact-settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+.contact-settings-group:last-child {
+    margin-bottom: 0;
+}
+
+.contact-settings-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.contact-settings-group input,
+.contact-settings-group textarea {
+    padding: 10px 14px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    background: #fff;
+    color: #0f172a;
+    font-family: inherit;
+    transition: all 0.2s;
+    width: 100%;
+    resize: vertical;
+}
+
+.contact-settings-group input:focus,
+.contact-settings-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.contact-settings-helper {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    font-style: italic;
+    line-height: 1.5;
+}
+.contact-settings-helper code {
+    background: #f1f5f9;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #0f172a;
+    font-weight: 600;
+}
+.contact-settings-helper strong {
+    color: #475569;
+    font-weight: 700;
+}
+
+/* ============================================
+   SAVE BUTTON — Blue
+   ============================================ */
+.contact-settings-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 8px;
+}
+
+.contact-settings-save-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: inherit;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+}
+
+.contact-settings-save-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.45);
+}
+
+.contact-settings-save-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   PREVIEW PANE
+   ============================================ */
+.contact-settings-preview-pane {
+    position: sticky;
+    top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-settings-preview-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #0f172a;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f1f5f9;
+}
+.contact-settings-preview-header svg {
+    color: #2563eb;
+}
+
+/* ============================================
+   PREVIEW CARDS
+   ============================================ */
+.contact-preview-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+}
+
+.contact-preview-card h3 {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    color: #0f172a;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.contact-preview-card h3 svg {
+    color: #2563eb;
+}
+
+.contact-preview-card > p {
+    font-size: 0.82rem;
+    color: #64748b;
+    margin: 0 0 16px;
+    line-height: 1.5;
+}
+
+/* ============================================
+   WHATSAPP PREVIEW BOX
+   ============================================ */
+.whatsapp-preview-float {
+    background: #eff6ff;
+    border-radius: 12px;
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+    border: 1px dashed #93c5fd;
+}
+
+.whatsapp-preview-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7rem;
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+    animation: previewPulse 2s ease-in-out infinite;
+}
+
+@keyframes previewPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+.whatsapp-preview-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.whatsapp-preview-row {
+    font-size: 0.82rem;
+    color: #475569;
+    display: flex;
+    gap: 8px;
+}
+
+.whatsapp-preview-row strong {
+    color: #0f172a;
+    min-width: 70px;
+}
+
+/* ============================================
+   TEST BUTTONS — Blue
+   ============================================ */
+.whatsapp-preview-test,
+.email-preview-test {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 8px 14px;
+    background: #2563eb;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.whatsapp-preview-test:hover,
+.email-preview-test:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.contact-preview-empty {
+    padding: 60px 20px;
+    text-align: center;
+    color: #94a3b8;
+    background: #eff6ff;
+    border-radius: 14px;
+    border: 1px dashed #93c5fd;
+}
+
+.contact-preview-empty svg {
+    font-size: 3rem;
+    color: #60a5fa;
+    margin-bottom: 12px;
+}
+
+.contact-preview-empty p {
+    margin: 0;
+    font-size: 0.88rem;
+}
+
+/* ============================================
+   EMAIL PREVIEW BOX — Blue
+   ============================================ */
+.email-preview-box {
+    padding: 14px;
+    background: #eff6ff;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: #1e40af;
+    font-weight: 600;
+    text-align: center;
+    word-break: break-all;
+    border: 1px solid #bfdbfe;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+    .contact-settings-layout {
+        grid-template-columns: 1fr;
+    }
+    .contact-settings-preview-pane {
+        position: static;
+    }
+}
+
+@media (max-width: 640px) {
+    .contact-settings-page {
+        padding: 20px 14px 40px;
+    }
+    .contact-settings-section {
+        padding: 20px;
+    }
+}
